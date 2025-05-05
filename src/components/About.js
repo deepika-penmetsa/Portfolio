@@ -1,31 +1,17 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { 
-  FaReact, 
-  FaHtml5, 
-  FaCss3Alt, 
-  FaNodeJs, 
   FaCode,
   FaUniversity,
   FaCalendarAlt,
   FaAward,
   FaMapMarkerAlt,
   FaCertificate,
-  FaExternalLinkAlt,
-  FaStar
+  FaStar,FaDatabase,
+  FaServer, FaSun, FaGraduationCap, FaAws, FaGitAlt,
+  FaDocker
 } from 'react-icons/fa';
 
-import {
-    FaBars, FaPaperPlane, FaLinkedinIn, FaGithub, FaEnvelope, FaPhone,
-    FaDownload, FaDatabase, FaFileCode, FaTasks, FaProjectDiagram, FaTrophy,
-    FaChevronRight, FaArrowUp,
-    FaServer, FaTerminal, FaSun, FaMoon, FaGraduationCap,
-    FaCloudMoon
-} from 'react-icons/fa';
-import {
-    FaJava, FaPython, FaJs, FaAws, FaGitAlt,
-    FaDocker
-} from 'react-icons/fa';
 
 import { 
     SiTypescript, 
