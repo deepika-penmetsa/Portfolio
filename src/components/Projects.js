@@ -1,12 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { FaGithub, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { RiExternalLinkLine } from 'react-icons/ri';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-const PROJECT_IMAGE_PLACEHOLDER = "https://via.placeholder.com/600x400";
 
 const Projects = ({ resumeData }) => {
   const sliderRef = useRef(null);

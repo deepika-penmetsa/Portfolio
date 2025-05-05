@@ -1,42 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { 
-  FaCode,
-  FaUniversity,
-  FaCalendarAlt,
-  FaAward,
-  FaMapMarkerAlt,
-  FaCertificate,
-  FaStar,FaDatabase,
-  FaServer, FaGraduationCap, FaAws, FaGitAlt,
-  FaDocker
-} from 'react-icons/fa';
-
-
-import { 
-    SiTypescript, 
-    SiRedux, 
-    SiJavascript, 
-    SiReact, 
-    SiHtml5, 
-    SiCss3, 
-    SiPython, 
-    SiDjango, 
-    SiPostman, 
-    SiGithub,
-    SiPostgresql,
-    SiMysql,
-    SiNodedotjs,
-    SiExpress,
-    SiMongodb,
-    SiTailwindcss,
-    SiBootstrap
-} from 'react-icons/si';
+import { FaCode, FaServer, FaGraduationCap, FaBookReader, FaUniversity, FaMapMarkerAlt, FaCalendarAlt, FaStar, FaAward, FaGitAlt, FaDatabase, FaDocker, FaAws } from 'react-icons/fa';
 import { GiDiploma } from 'react-icons/gi';
+import { FaCertificate } from 'react-icons/fa';
+import { SiJavascript, SiTypescript, SiReact, SiRedux, SiNodedotjs, SiExpress, SiPython, SiDjango, SiBootstrap, SiTailwindcss, SiGithub, SiPostman, SiMysql, SiPostgresql, SiMongodb, SiHtml5, SiCss3 } from 'react-icons/si';
 import { VscTerminalCmd } from 'react-icons/vsc';
 import { TbBrandVscode } from 'react-icons/tb';
 import { motion } from 'framer-motion';
-import { FaBookReader } from 'react-icons/fa';
 
 const About = ({ resumeData }) => {
 const personalInfo = [
@@ -45,8 +15,6 @@ const personalInfo = [
     "Passionate about clean code, intuitive design, and solving real-world problems through technology",
     "When not coding: hiking trails, reading tech blogs, or getting lost in a good thriller novel"
 ];
-
-  const [educationFilter, setEducationFilter] = useState('all');
 
   const techIcons = {
     // Languages
@@ -78,16 +46,6 @@ const personalInfo = [
     'Docker': <FaDocker size={22} />,
     'AWS': <FaAws size={22} />,
   };
-
-  const filteredEducation = resumeData.education.filter(edu => {
-    if (educationFilter === 'all') return true;
-    if (educationFilter === 'degrees') return edu.type === 'degree';
-    if (educationFilter === 'certifications') return edu.type === 'certification';
-    return true;
-  });
-
-  const degreeCount = resumeData.education.filter(edu => edu.type === 'degree').length;
-  const certificationCount = resumeData.education.filter(edu => edu.type === 'certification').length;
 
   return (
     <AboutContainer>
@@ -600,32 +558,28 @@ const EducationDetail = styled.div`
   }
 `;
 
-const CertificationButton = styled.a`
-  display: inline-flex;
+const EducationDescription = styled.p`
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: ${props => props.theme.foreground};
+  opacity: 0.9;
+  margin-top: 12px;
+  margin-bottom: 12px;
+border-left: 3px solid ${props => props.theme.border};
+  padding-left: 12px;
+`;
+
+const EducationLocation = styled.div`
+  display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: 15px;
-  padding: 8px 16px;
-  background-color: ${props => 
-    props.isCertification ? 
-    props.theme.secondary : 
-    props.theme.primary};
-  color: white;
-  border-radius: 4px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  border: none;
-  cursor: pointer;
+  font-size: 0.9rem;
+  color: ${props => props.theme.syntax.variable};
+  margin-bottom: 10px;
   
-  &:hover {
-    background-color: ${props => 
-      props.isCertification ? 
-      props.theme.primary : 
-      props.theme.secondary};
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  svg {
+    color: ${props => props.theme.secondary};
+    min-width: 14px;
   }
 `;
 
@@ -653,31 +607,6 @@ const InterestItem = styled.span`
   font-size: 0.9rem;
   font-weight: 500;
   border: 1px solid ${props => props.theme.border};
-`;
-
-const EducationDescription = styled.p`
-  font-size: 0.9rem;
-  line-height: 1.6;
-  color: ${props => props.theme.foreground};
-  opacity: 0.9;
-  margin-top: 12px;
-  margin-bottom: 12px;
-border-left: 3px solid ${props => props.theme.border};
-  padding-left: 12px;
-`;
-
-const EducationLocation = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.9rem;
-  color: ${props => props.theme.syntax.variable};
-  margin-bottom: 10px;
-  
-  svg {
-    color: ${props => props.theme.secondary};
-    min-width: 14px;
-  }
 `;
 
 export default About;
