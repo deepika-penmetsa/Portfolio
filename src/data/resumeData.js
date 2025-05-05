@@ -1,3 +1,9 @@
+import jobmatrixImage from '../data/jobmatrix.png';
+import elevateImage from '../data/elevate.png';
+import iplImage from '../data/ipl.png';
+
+
+
 const resumeData = {
   personal: {
     name: "Deepika Penmetsa",
@@ -9,10 +15,11 @@ const resumeData = {
   },
   summary: "A skilled Full Stack Developer with experience in React, JavaScript, Python, SQL, and Django. Proficient in UI design, debugging, performance optimization, and API integration. Demonstrated expertise in building scalable web applications. Proven ability to enhance project workflows and development efficiency, aiming to leverage these skills to contribute to innovative and high-performance web solutions.",
   skills: {
-    languages: ["Python", "SQL", "Javascript", "Typescript", "HTML/CSS"],
-    frameworks: ["React JS", "GitHub", "Postman", "VS Code", "Django"],
+    languages: ["Python", "SQL", "JavaScript", "TypeScript", "HTML", "CSS"],
+    frameworks: ["React", "GitHub", "Postman", "VS Code", "Django"],
     coursework: ["Data Structures and Algorithms"]
   },
+
   experience: [
     {
       title: "Graduate Research Assistant",
@@ -50,10 +57,24 @@ const resumeData = {
   ],
   projects: [
     {
+      name: "Job Matrix",
+      links: {
+        live: "https://jobmatrixapp.netlify.app",
+        github: "https://github.com/RANJITH-REDDY-N/JobMatrixFrontend"
+      },
+      image: jobmatrixImage,
+      description: [
+        "Developed the Frontend of a College Club Management Platform using React.js, enabling students to explore, join, and manage clubs.",
+        "Designed and implemented a responsive and interactive UI for club details, announcements, events, and discussions.",
+        "Integrated dynamic navigation, real-time updates, and seamless API interactions for an enhanced user experience."
+      ]
+    },
+    {
       name: "Elevate",
       links: {
-        github: "https://github.com/deepika/elevate"
+        github: "https://github.com/Deepika130599/StudentClubManagment"
       },
+      image: elevateImage,
       description: [
         "Developed the Frontend of a College Club Management Platform using React.js, enabling students to explore, join, and manage clubs.",
         "Designed and implemented a responsive and interactive UI for club details, announcements, events, and discussions.",
@@ -63,9 +84,10 @@ const resumeData = {
     {
       name: "IPL Dashboard",
       links: {
-        live: "https://ipldashboard.deepika.dev",
-        github: "https://github.com/deepika/ipl-dashboard"
+        live: "https://imaginative-pithivier-21ee16.netlify.app",
+        github: "https://github.com/Deepika130599/IPL_Dashboard"
       },
+      image: iplImage,
       description: [
         "Designed and implemented an IPL Dashboard using React JS for the 2020 season, serving real-time data for over 30+ matches, 8 teams, and their complete player rosters.",
         "Utilized React JS for a dynamic and user-friendly interface, showcasing team details and statistics.",
@@ -78,13 +100,29 @@ const resumeData = {
       degree: "Master of Science in Information Systems",
       institution: "Central Michigan University",
       location: "Mt Pleasant, Michigan",
-      period: "Anticipated Graduation: May 2025",
-      gpa: "3.8"
+      period: "Aug 2023 - May 2025",
+      // gpa: "3.8",
+      type: "degree",
+      description: "Focusing on advanced database systems, web application development, and business intelligence. Participated in research projects related to data visualization and analytics.",
+      credentialUrl: "https://www.cmich.edu/academics/colleges/college-business-administration/information-systems"
+    },
+    {
+      degree: "Bachelor of Technology",
+      institution: "Jawaharlal Nehru Technological University",
+      location: "Hyderabad, Telangana",
+      period: "Aug 2016 - May 2020",
+      // gpa: "3.8",
+      type: "degree",
+      description: "Completed coursework in Computer Science with a focus on software engineering, data structures, and web technologies. Developed multiple projects including a student management system.",
+      credentialUrl: "https://jntuh.ac.in/academics"
     },
     {
       degree: "Full Stack Web Development",
       institution: "CCBP Intensive",
-      period: "Dec 2020 - Jul 2021"
+      period: "Dec 2020 - Jul 2021",
+      type: "certification",
+      description: "Completed over 1200 hours of hands-on coding and 30+ projects covering React, Node.js, Express, and database technologies. Earned certification with distinction.",
+      credentialUrl: "https://certificates.ccbp.in/"
     }
   ],
   files: {
@@ -199,11 +237,11 @@ I'm a Full Stack Developer with a passion for building user-friendly web applica
       "profiles": [
         {
           "network": "LinkedIn",
-          "url": "https://linkedin.com/in/deepika"
+          "url": "https://www.linkedin.com/in/deepika-penmetsa-59a8911b1/"
         },
         {
           "network": "GitHub",
-          "url": "https://github.com/deepika"
+          "url": "https://github.com/Deepika130599"
         }
       ],
       "message": "I'm currently open to new opportunities. Feel free to reach out if you'd like to discuss potential collaborations!"

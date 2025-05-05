@@ -76,7 +76,15 @@ const HomeContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   position: relative;
-  padding: 60px 0;
+  padding: 60px 0 100px;
+  
+  @media (max-width: 768px) {
+    padding-bottom: 120px;
+  }
+  
+  @media (max-width: 480px) {
+    padding-bottom: 140px;
+  }
   
   &::before {
     content: '';
@@ -205,9 +213,14 @@ const SecondaryButton = styled(Button)`
 const SocialLinks = styled.div`
   display: flex;
   gap: 1rem;
+  margin-bottom: 20px;
   
   @media (max-width: 992px) {
     justify-content: center;
+  }
+  
+  @media (max-width: 480px) {
+    margin-bottom: 40px;
   }
 `;
 
@@ -271,6 +284,7 @@ const ScrollIndicator = styled.div`
   font-size: 0.9rem;
   opacity: 0.6;
   transition: opacity 0.3s;
+  z-index: 10;
   
   &:hover {
     opacity: 1;
@@ -278,6 +292,15 @@ const ScrollIndicator = styled.div`
   
   span {
     margin-top: 8px;
+  }
+  
+  @media (max-width: 768px) {
+    bottom: 30px;
+  }
+  
+  @media (max-width: 480px) {
+    bottom: 15px;
+    font-size: 0.8rem;
   }
 `;
 
@@ -308,6 +331,18 @@ const MouseIcon = styled.div`
     100% {
       transform: translateX(-50%) translateY(20px);
       opacity: 0;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    width: 24px;
+    height: 40px;
+    border-radius: 12px;
+    
+    .wheel {
+      width: 3px;
+      height: 6px;
+      top: 8px;
     }
   }
 `;

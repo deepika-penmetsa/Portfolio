@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { FiSun, FiMoon } from 'react-icons/fi';
 
 const Navbar = ({ activeSection, setActiveSection, currentTheme, toggleTheme }) => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const navRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,50 +31,72 @@ const Navbar = ({ activeSection, setActiveSection, currentTheme, toggleTheme }) 
     }
   };
 
+  const handleMouseEnter = () => {
+    if (window.innerWidth <= 768) {
+      setMenuOpen(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (window.innerWidth <= 768) {
+      setMenuOpen(false);
+    }
+  };
+
   return (
-    <NavbarContainer data-scrolled={scrolled}>
+    <NavbarContainer data-scrolled={scrolled} ref={navRef}>
       <NavbarContent>
         <Logo onClick={() => handleNavClick('home')}>
           <span>&lt;</span>Deepika<span>/&gt;</span>
         </Logo>
         
-        <MenuToggle onClick={() => setMenuOpen(!menuOpen)}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </MenuToggle>
-        
-        <NavLinks open={menuOpen}>
-          <NavItem 
-            data-active={activeSection === 'home'} 
-            onClick={() => handleNavClick('home')}
+        <RightContainer>
+          <NavLinks 
+            open={menuOpen}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
-            Home
-          </NavItem>
-          <NavItem 
-            data-active={activeSection === 'about'} 
-            onClick={() => handleNavClick('about')}
-          >
-            About
-          </NavItem>
-          <NavItem 
-            data-active={activeSection === 'projects'} 
-            onClick={() => handleNavClick('projects')}
-          >
-            Projects
-          </NavItem>
-          <NavItem 
-            data-active={activeSection === 'contact'} 
-            onClick={() => handleNavClick('contact')}
-          >
-            Contact
-          </NavItem>
-          <ThemeToggleItem>
+            <NavItem 
+              data-active={activeSection === 'home'} 
+              onClick={() => handleNavClick('home')}
+            >
+              Home
+            </NavItem>
+            <NavItem 
+              data-active={activeSection === 'about'} 
+              onClick={() => handleNavClick('about')}
+            >
+              About
+            </NavItem>
+            <NavItem 
+              data-active={activeSection === 'projects'} 
+              onClick={() => handleNavClick('projects')}
+            >
+              Projects
+            </NavItem>
+            <NavItem 
+              data-active={activeSection === 'contact'} 
+              onClick={() => handleNavClick('contact')}
+            >
+              Contact
+            </NavItem>
+          </NavLinks>
+          
+          <NavControls>
             <ThemeToggleButton onClick={toggleTheme}>
               {currentTheme === 'dark' ? <FiSun size={22} /> : <FiMoon size={22} />}
             </ThemeToggleButton>
-          </ThemeToggleItem>
-        </NavLinks>
+            
+            <MenuToggle 
+              onClick={() => setMenuOpen(!menuOpen)}
+              onMouseEnter={handleMouseEnter}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </MenuToggle>
+          </NavControls>
+        </RightContainer>
       </NavbarContent>
     </NavbarContainer>
   );
@@ -104,6 +127,11 @@ const NavbarContent = styled.div`
   margin: 0 auto;
 `;
 
+const RightContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const Logo = styled.div`
   font-size: 1.5rem;
   font-weight: 700;
@@ -113,6 +141,13 @@ const Logo = styled.div`
   span {
     color: ${props => props.theme.primary};
   }
+`;
+
+const NavControls = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-left: 15px;
 `;
 
 const NavLinks = styled.ul`
@@ -201,29 +236,19 @@ const MenuToggle = styled.div`
   }
 `;
 
-const ThemeToggleItem = styled.li`
-  margin: 0 0.5rem;
-  
-  @media (max-width: 768px) {
-    margin: 0.5rem 0;
-    padding: 0.5rem 2rem;
-    width: 100%;
-    text-align: center;
-  }
-`;
-
 const ThemeToggleButton = styled.button`
   background: ${props => props.theme.name === 'dark' ? 'rgba(0, 255, 0, 0.1)' : 'rgba(3, 102, 214, 0.1)'};
   border: 1px solid ${props => props.theme.name === 'dark' ? '#00AA00' : props.theme.primary};
-  color: ${props => props.theme.navbar.foreground};
+  color:  ${props => props.theme.name === 'dark' ? '#00AA00' : props.theme.primary};
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   transition: all 0.3s ease;
+  padding: 0;
   
   &:hover {
     background-color: ${props => props.theme.name === 'dark' ? 'rgba(0, 255, 0, 0.2)' : 'rgba(3, 102, 214, 0.2)'};
@@ -236,8 +261,8 @@ const ThemeToggleButton = styled.button`
   }
   
   svg {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
   }
 `;
 
