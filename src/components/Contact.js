@@ -3,11 +3,15 @@ import styled from 'styled-components';
 import { 
   MdEmail, 
   MdLocationOn, 
-  MdPhone
+  MdPhone,
+  MdDownload,
+  MdOpenInNew
 } from 'react-icons/md';
-import { FaLinkedin, FaGithub } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaFileAlt } from 'react-icons/fa';
 
 const Contact = ({ resumeData }) => {
+  const resumePath = '/assets/Deepika_Penmetsa_Resume.pdf';
+
   return (
     <ContactContainer id="contact">
       <div className="container">
@@ -53,6 +57,22 @@ const Contact = ({ resumeData }) => {
                   <MdLocationOn />
                 </ContactIcon>
                 <ContactInfoValue>{resumeData.personal.location}</ContactInfoValue>
+              </ContactInfoItem>
+
+              <ContactInfoItem>
+                <ContactIcon>
+                  <FaFileAlt />
+                </ContactIcon>
+                <ContactInfoValue>
+                  <ResumeActions>
+                    <ResumeLink href={resumePath} target="_blank" rel="noopener noreferrer">
+                      <MdOpenInNew /> View Resume
+                    </ResumeLink>
+                    <ResumeLink href={resumePath} download="Deepika_Penmetsa_Resume.pdf">
+                      <MdDownload />
+                    </ResumeLink>
+                  </ResumeActions>
+                </ContactInfoValue>
               </ContactInfoItem>
             </ContactInfoItems>
             
@@ -295,6 +315,35 @@ const SocialLink = styled.a`
       width: 18px;
       height: 18px;
     }
+  }
+`;
+
+const ResumeActions = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+`;
+
+const ResumeLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  background-color: ${props => `${props.theme.primary}15`};
+  color: ${props => props.theme.primary};
+  border-radius: 4px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: 1px solid ${props => `${props.theme.primary}30`};
+  
+  &:hover {
+    background-color: ${props => props.theme.primary};
+    color: ${props => props.theme.background};
+  }
+
+  svg {
+    font-size: 16px;
   }
 `;
 
