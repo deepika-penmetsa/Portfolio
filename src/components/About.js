@@ -8,7 +8,7 @@ import {
   FaMapMarkerAlt,
   FaCertificate,
   FaStar,FaDatabase,
-  FaServer, FaSun, FaGraduationCap, FaAws, FaGitAlt,
+  FaServer, FaGraduationCap, FaAws, FaGitAlt,
   FaDocker
 } from 'react-icons/fa';
 
@@ -23,7 +23,6 @@ import {
     SiPython, 
     SiDjango, 
     SiPostman, 
-    SiVisualstudiocode, 
     SiGithub,
     SiPostgresql,
     SiMysql,
@@ -36,7 +35,7 @@ import {
 import { GiDiploma } from 'react-icons/gi';
 import { VscTerminalCmd } from 'react-icons/vsc';
 import { TbBrandVscode } from 'react-icons/tb';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { FaBookReader } from 'react-icons/fa';
 
 const About = ({ resumeData }) => {
