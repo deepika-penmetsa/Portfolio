@@ -10,7 +10,7 @@ import { motion } from 'framer-motion';
 
 const About = ({ resumeData }) => {
 const personalInfo = [
-    "Frontend Developer specializing in React & TypeScript, crafting interfaces that are both beautiful and functional",
+    "Frontend Developer specializing in React & JavaScript, crafting interfaces that are both beautiful and functional",
     "Built AI-powered UI components at Ignitarium and high-performance web apps at Sony, with a focus on user experience",
     "Passionate about clean code, intuitive design, and solving real-world problems through technology",
     "When not coding: hiking trails, reading tech blogs, or getting lost in a good thriller novel"

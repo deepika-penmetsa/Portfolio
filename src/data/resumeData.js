@@ -64,9 +64,10 @@ const resumeData = {
       },
       image: jobmatrixImage,
       description: [
-        "Developed the Frontend of a College Club Management Platform using React.js, enabling students to explore, join, and manage clubs.",
-        "Designed and implemented a responsive and interactive UI for club details, announcements, events, and discussions.",
-        "Integrated dynamic navigation, real-time updates, and seamless API interactions for an enhanced user experience."
+        "Built the Django backend for a job portal application with REST API endpoints for job postings and applications",
+        "Implemented authentication, authorization, and data models for job seekers and employers",
+        "Designed database schema and optimized queries for efficient job search functionality",
+        "Integrated the Django backend with a React frontend through RESTful API interactions"
       ]
     },
     {
@@ -113,7 +114,7 @@ const resumeData = {
       period: "Aug 2016 - May 2020",
       // gpa: "3.8",
       type: "degree",
-      description: "Completed coursework in Computer Science with a focus on software engineering, data structures, and web technologies. Developed multiple projects including a student management system.",
+      description: "Completed coursework in Electronics and Communication Engineering with a focus on software engineering, data structures, and web technologies. Developed multiple projects including a IPL Dashboard.",
       credentialUrl: "https://jntuh.ac.in/academics"
     },
     {

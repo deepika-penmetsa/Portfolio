@@ -293,6 +293,7 @@ const ProjectCard = styled.div`
   transition: all 0.3s ease;
   position: relative;
   height: 100%;
+  min-height: 500px;
   display: flex;
   flex-direction: column;
   
@@ -307,6 +308,10 @@ const ProjectCard = styled.div`
     .overlay-links {
       opacity: 1;
     }
+  }
+
+  @media (max-width: 768px) {
+    min-height: auto;
   }
 `;
 
@@ -359,10 +364,6 @@ const ProjectDescription = styled.div`
   margin-bottom: 20px;
   line-height: 1.6;
   flex-grow: 1;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
   
   p {
     margin-bottom: 1rem;
