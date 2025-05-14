@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaCode, FaServer, FaGraduationCap, FaBookReader, FaUniversity, FaMapMarkerAlt, FaCalendarAlt, FaStar, FaAward, FaGitAlt, FaDatabase, FaDocker, FaAws } from 'react-icons/fa';
 import { GiDiploma } from 'react-icons/gi';
@@ -6,607 +6,530 @@ import { FaCertificate } from 'react-icons/fa';
 import { SiJavascript, SiTypescript, SiReact, SiRedux, SiNodedotjs, SiExpress, SiPython, SiDjango, SiBootstrap, SiTailwindcss, SiGithub, SiPostman, SiMysql, SiPostgresql, SiMongodb, SiHtml5, SiCss3 } from 'react-icons/si';
 import { VscTerminalCmd } from 'react-icons/vsc';
 import { TbBrandVscode } from 'react-icons/tb';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+    FaJava, FaPython, FaJs, FaCss3Alt, 
+    FaAngular, FaProjectDiagram, FaHtml5, FaReact,
+    FaChevronRight
+} from 'react-icons/fa';
+import { 
+    SiSpringboot, SiAngular,
+    SiTerraform, SiJunit5, SiJenkins, SiSelenium, 
+    SiSwagger, SiJira, SiJetbrains, SiTableau
+} from 'react-icons/si';
+import { BiLogoVisualStudio } from 'react-icons/bi';
+import { MdDeveloperMode } from 'react-icons/md';
+import { BsLightningCharge } from 'react-icons/bs';
+import { DiDatabase } from 'react-icons/di';
 
 const About = ({ resumeData }) => {
-const personalInfo = [
-    "Frontend Developer specializing in React & JavaScript, crafting interfaces that are both beautiful and functional",
-    "Built AI-powered UI components at Ignitarium and high-performance web apps at Sony, with a focus on user experience",
-    "Passionate about clean code, intuitive design, and solving real-world problems through technology",
-    "When not coding: hiking trails, reading tech blogs, or getting lost in a good thriller novel"
-];
+  // Initialize with the first experience item from resumeData
+  const [activeItem, setActiveItem] = useState(0);
+  
+  // Format experience data for the interactive panel
+  const experienceItems = resumeData?.experience?.map((exp, index) => ({
+    id: `exp-${index}`,
+    name: exp.company,
+    date: exp.period,
+    position: `${exp.title} @ ${exp.company}`,
+    location: exp.location,
+    bullets: exp.bullets,
+  })) || [];
+  
+  const handleItemClick = (index) => {
+    setActiveItem(index);
+  };
+  
+  // Get the currently active item
+  const activeItemData = experienceItems[activeItem];
 
-  const techIcons = {
-    // Languages
-    'JavaScript': <SiJavascript size={22} />,
-    'TypeScript': <SiTypescript size={22} />,
-    'HTML': <SiHtml5 size={22} />,
-    'CSS': <SiCss3 size={22} />,
-    'Python': <SiPython size={22} />,
-    'SQL': <FaDatabase size={22} />,
-    
-    // Frameworks & Libraries
-    'React': <SiReact size={22} />,
-    'Node.js': <SiNodedotjs size={22} />,
-    'Redux': <SiRedux size={22} />,
-    'Django': <SiDjango size={22} />,
-    'Express': <SiExpress size={22} />,
-    'Tailwind': <SiTailwindcss size={22} />,
-    'Bootstrap': <SiBootstrap size={22} />,
-    
-    // Tools & Platforms
-    'GitHub': <SiGithub size={22} />,
-    'Git': <FaGitAlt size={22} />,
-    'Postman': <SiPostman size={22} />,
-    'VS Code': <TbBrandVscode size={22} />,
-    'MongoDB': <SiMongodb size={22} />,
-    'PostgreSQL': <SiPostgresql size={22} />,
-    'MySQL': <SiMysql size={22} />,
-    'Terminal': <VscTerminalCmd size={22} />,
-    'Docker': <FaDocker size={22} />,
-    'AWS': <FaAws size={22} />,
+  // Animation variants
+  const fadeInUp = {
+    initial: { 
+      opacity: 0, 
+      y: 20 
+    },
+    animate: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: 0.4, 
+        ease: "easeOut" 
+      }
+    },
+    exit: { 
+      opacity: 0, 
+      y: -20,
+      transition: { 
+        duration: 0.3, 
+        ease: "easeIn" 
+      }
+    }
+  };
+
+  const staggerBullets = {
+    animate: {
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
   };
 
   return (
-    <AboutContainer>
-      <div className="container">
-        <SectionHeader>
-          <SectionTitle>About Me</SectionTitle>
-          <SectionSubtitle>My Journey & Expertise</SectionSubtitle>
-        </SectionHeader>
-        
-        <AboutContent>
-          <div>
-            <AboutText>
-              <p>{resumeData.summary}</p>
-              {personalInfo.map((info, index) => (
-                <p key={index}>{info}</p>
-              ))}
-            </AboutText>
-            
-            <SkillsContainer>
-              <SkillsTitle>Technical Expertise</SkillsTitle>
-              
-              <SkillsCategoryTitle>
-                <FaCode size={18} /> Programming Languages
-              </SkillsCategoryTitle>
-              <SkillsContent>
-                {resumeData.skills.languages.map((skill, index) => (
-                  <SkillBadge key={`lang-${index}`} category="language">
-                    <SkillIcon category="language">{techIcons[skill] || <FaCode size={22} />}</SkillIcon>
-                    {skill}
-                  </SkillBadge>
-                ))}
-              </SkillsContent>
-              
-              <SkillsCategoryTitle>
-                <FaServer size={18} /> Frameworks & Tools
-              </SkillsCategoryTitle>
-              <SkillsContent>
-                {resumeData.skills.frameworks.map((skill, index) => (
-                  <SkillBadge key={`framework-${index}`} category="framework">
-                    <SkillIcon category="framework">{techIcons[skill] || <FaCode size={22} />}</SkillIcon>
-                    {skill}
-                  </SkillBadge>
-                ))}
-              </SkillsContent>
-              
-              {resumeData.skills.coursework && resumeData.skills.coursework.length > 0 && (
-                <>
-                  <SkillsCategoryTitle>
-                    <FaGraduationCap size={18} /> Coursework
-                  </SkillsCategoryTitle>
-                  <SkillsContent>
-                    {resumeData.skills.coursework.map((course, index) => (
-                      <SkillBadge key={`course-${index}`} category="course">
-                        <SkillIcon category="course"><FaBookReader size={22} /></SkillIcon>
-                        {course}
-                      </SkillBadge>
-                    ))}
-                  </SkillsContent>
-                </>
-              )}
-            </SkillsContainer>
-            
-            <InterestsContainer>
-              <InterestsTitle>Professional Interests</InterestsTitle>
-              <InterestsList>
-                <InterestItem>Frontend Development</InterestItem>
-                <InterestItem>Full Stack Web Development</InterestItem>
-                <InterestItem>User Experience Design</InterestItem>
-                <InterestItem>System Architecture</InterestItem>
-                <InterestItem>Data Visualization</InterestItem>
-                <InterestItem>API Design</InterestItem>
-                <InterestItem>Performance Optimization</InterestItem>
-              </InterestsList>
-            </InterestsContainer>
-          </div>
-          
-          <ExperienceContainer>
-            <ExperienceTitle>Professional Experience</ExperienceTitle>
-            <Timeline>
-              {resumeData.experience.map((exp, index) => (
-                <TimelineItem key={index}>
-                  <TimelineDot />
-                  <TimelineContent>
-                    <TimelineTitle>
-                      {exp.title} @ {exp.company}
-                    </TimelineTitle>
-                    <TimelineDate>{exp.period}</TimelineDate>
-                    <TimelineDescription>
-                      <ul>
-                        {exp.bullets.map((bullet, bulletIndex) => (
-                          <li key={bulletIndex}>{bullet}</li>
-                        ))}
-                      </ul>
-                    </TimelineDescription>
-                  </TimelineContent>
-                </TimelineItem>
-              ))}
-            </Timeline>
-          </ExperienceContainer>
-        </AboutContent>
-        
-        <EducationContainer>
-          <EducationTitle>Education & Certifications</EducationTitle>
-          <EducationContent>
-            {resumeData.education.map((edu, index) => (
-              <EducationCardWrapper
-                layout
-                key={`edu-${index}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-              >
-                <EducationCard isCertification={edu.type === 'certification'}>
-                  <EducationInfo>
-                    <EducationHeader>
-                      <EducationTypeTag isCertification={edu.type === 'certification'}>
-                        {edu.type === 'certification' ? 
-                          <><FaCertificate size={14} /> Certification</> : 
-                          <><GiDiploma size={14} /> Degree</>
-                        }
-                      </EducationTypeTag>
-                    </EducationHeader>
-                    <EducationDegree>{edu.degree}</EducationDegree>
-                    <EducationSchool>
-                      {edu.type === 'certification' ? 
-                        <FaAward size={14} /> :
-                        <FaUniversity size={14} />
-                      }
-                      {edu.institution}
-                    </EducationSchool>
-                    {edu.location && (
-                      <EducationLocation>
-                        <FaMapMarkerAlt size={14} />
-                        {edu.location}
-                      </EducationLocation>
-                    )}
-                    <EducationPeriod>
-                      <FaCalendarAlt size={14} />
-                      {edu.period}
-                    </EducationPeriod>
-                    {edu.gpa && (
-                      <EducationDetail>
-                        <span><FaStar size={14} /> GPA:</span> {edu.gpa}
-                      </EducationDetail>
-                    )}
-                    {edu.description && (
-                      <EducationDescription>
-                        {edu.description}
-                      </EducationDescription>
-                    )}
+    <AboutSection
+        id="about"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+    >
+        <div className="container">
+            <SectionHeader>
+                <SectionTitle>About Me</SectionTitle>
+                <SectionSubtitle>Full Stack Developer  |  React Specialist  |  Problem Solver</SectionSubtitle>
+            </SectionHeader>
+
+            <AboutContent>
+                <AboutTextContainer
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                >
+                    <SkillsTitle>Professional Summary</SkillsTitle>
+                    <AboutText>
+                        <p>{resumeData?.summary || "A skilled Full Stack Developer with experience in React, JavaScript, Python, SQL, and Django."}</p>
+                    </AboutText>
+
+                    <SkillsContainer>
+                        <SkillsTitle>My Tech Stack</SkillsTitle>
+                        
+                        <SkillCategory>
+                            <SkillCategoryTitle>Languages and Frameworks</SkillCategoryTitle>
+                            <SkillsGrid>
+                                {[
+                                    { icon: SiPython, name: 'Python' },
+                                    { icon: FaReact, name: 'ReactJS' },
+                                    { icon: SiDjango, name: 'Django' },
+                                    { icon: FaAngular, name: 'Angular' },
+                                    { icon: FaJs, name: 'Javascript' },
+                                    { icon: SiTypescript, name: 'Typescript' },
+                                    { icon: FaDatabase, name: 'SQL' },
+                                    { icon: FaHtml5, name: 'HTML5' },
+                                    { icon: FaCss3Alt, name: 'CSS3' }
+                                ].map((skill, index) => (
+                                    <SkillCard 
+                                        key={index}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                                    >
+                                        <skill.icon />
+                                        <span>{skill.name}</span>
+                                    </SkillCard>
+                                ))}
+                            </SkillsGrid>
+                        </SkillCategory>
+
+                        <SkillCategory>
+                            <SkillCategoryTitle>Developer Tools</SkillCategoryTitle>
+                            <SkillsGrid>
+                                {[
+                                    { icon: FaGitAlt, name: 'Git' },
+                                    { icon: SiRedux, name: 'Redux' },
+                                    { icon: SiPostman, name: 'Postman' },
+                                    { icon: SiSwagger, name: 'Swagger' },
+                                    { icon: SiJira, name: 'JIRA' },
+                                    { icon: MdDeveloperMode, name: 'Agile Methodologies' },
+                                    { icon: SiJetbrains, name: 'Jetbrains IDEs' },
+                                    { icon: BiLogoVisualStudio, name: 'VS Code' },
+                                    { icon: SiTableau, name: 'Tableau' },
+                                    { icon: FaAws, name: 'AWS' },
+                                    { icon: FaAws, name: 'AWS S3' }
+                                ].map((skill, index) => (
+                                    <SkillCard 
+                                        key={index}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                                    >
+                                        <skill.icon />
+                                        <span>{skill.name}</span>
+                                    </SkillCard>
+                                ))}
+                            </SkillsGrid>
+                        </SkillCategory>
+
+                        <SkillCategory>
+                            <SkillCategoryTitle>Core Skills</SkillCategoryTitle>
+                            <SkillsGrid>
+                                {[ 
+                                    { icon: MdDeveloperMode, name: 'Data Structures and Algorithms' },
+                                    { icon: FaProjectDiagram, name: 'System Design' },
+                                    { icon: DiDatabase, name: 'DBMS' },
+                                    { icon: FaServer, name: 'Restful APIs' },
+                                    { icon: BsLightningCharge, name: 'Vibe Coding' }
+                                ].map((skill, index) => (
+                                    <SkillCard 
+                                        key={index}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                                    >
+                                        <skill.icon />
+                                        <span>{skill.name}</span>
+                                    </SkillCard>
+                                ))}
+                            </SkillsGrid>
+                        </SkillCategory>
+                    </SkillsContainer>
                     
-                  </EducationInfo>
-                </EducationCard>
-              </EducationCardWrapper>
-            ))}
-          </EducationContent>
-        </EducationContainer>
-      </div>
-    </AboutContainer>
+                    <ExperienceContainer>
+                        <SkillsTitle>Experience</SkillsTitle>
+                        
+                        <WorkContainer>
+                            <CompaniesColumn>
+                                {experienceItems.map((item, index) => (
+                                    <CompanyButton 
+                                        key={item.id}
+                                        isActive={activeItem === index}
+                                        onClick={() => handleItemClick(index)}
+                                        as={motion.div}
+                                        whileHover={{ 
+                                            x: activeItem === index ? 0 : 5, 
+                                            transition: { duration: 0.2 } 
+                                        }}
+                                    >
+                                        {item.name}
+                                    </CompanyButton>
+                                ))}
+                            </CompaniesColumn>
+                            
+                            <ContentColumn>
+                                <AnimatePresence mode="wait">
+                                    <ContentPanel
+                                        key={activeItemData?.id}
+                                        variants={fadeInUp}
+                                        initial="initial"
+                                        animate="animate"
+                                        exit="exit"
+                                    >
+                                        <JobTitle>
+                                            {activeItemData?.position?.split('@')[0].trim()} <CompanySpan>@ {activeItemData?.position?.split('@')[1]?.trim()}</CompanySpan>
+                                        </JobTitle>
+                                        
+                                        <JobDate>{activeItemData?.date}</JobDate>
+                                        
+                                        <BulletList variants={staggerBullets} initial="initial" animate="animate">
+                                            {activeItemData?.bullets?.map((bullet, index) => (
+                                                <BulletItem key={index} variants={fadeInUp}>
+                                                    <BulletArrow>▹</BulletArrow>
+                                                    <BulletContent>{bullet}</BulletContent>
+                                                </BulletItem>
+                                            ))}
+                                        </BulletList>
+                                    </ContentPanel>
+                                </AnimatePresence>
+                            </ContentColumn>
+                        </WorkContainer>
+                    </ExperienceContainer>
+                </AboutTextContainer>
+            </AboutContent>
+        </div>
+    </AboutSection>
   );
 };
 
-const AboutContainer = styled.div`
-  padding: 80px 0;
-  background-color: ${props => props.theme.section.background};
+const AboutSection = styled(motion.section)`
+  padding: 6rem 0;
+  background-color: ${props => props.theme.background || 'var(--bg-color)'};
 `;
 
 const SectionHeader = styled.div`
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 3rem;
 `;
 
 const SectionTitle = styled.h2`
   font-size: 2.5rem;
-  font-weight: 700;
-  color: ${props => props.theme.syntax.function};
   margin-bottom: 0.5rem;
+  color: ${props => props.theme.syntax?.function || 'var(--heading-color)'};
+  font-weight: 700;
 `;
 
 const SectionSubtitle = styled.p`
   font-size: 1.1rem;
-  color: ${props => props.theme.foreground};
+  color: ${props => props.theme.foreground || 'var(--text-color)'};
   opacity: 0.8;
 `;
 
 const AboutContent = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  background-color: ${props => props.theme.background || 'var(--bg-color)'};
+`;
+
+const AboutTextContainer = styled(motion.div)`
+  width: 100%;
+  max-width: 1080px;
+  color: ${props => props.theme.foreground || 'var(--text-color)'};
+  line-height: 1.7;
 `;
 
 const AboutText = styled.div`
-  margin-bottom: 30px;
-  line-height: 1.7;
-  
   p {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
   }
 `;
 
-const SkillsContainer = styled.div`
-  margin-bottom: 30px;
-`;
-
-const SkillsTitle = styled.h3`
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-  color: ${props => props.theme.syntax.variable};
-`;
-
-const SkillsCategoryTitle = styled.h4`
-  font-size: 1.2rem;
-  margin-bottom: 15px;
-  margin-top: 20px;
-  color: ${props => props.theme.syntax.variable};
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  svg {
-    color: ${props => props.theme.primary};
-  }
-`;
-
-const SkillsContent = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 15px;
-`;
-
-const SkillBadge = styled.span`
-  background-color: ${props => props.theme.card.background};
-  color: ${props => props.theme.foreground};
-  padding: 0.5rem 1rem;
-  border-radius: 30px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  border: 1px solid ${props => props.theme.border};
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-`;
-
-const SkillIcon = styled.span`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ${props => props.theme.primary};
-  
-  svg {
-    width: 20px;
-    height: 20px;
-    font-size: 20px;
-  }
-`;
-
-const ExperienceContainer = styled.div``;
-
-const ExperienceTitle = styled.h3`
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-  color: ${props => props.theme.syntax.variable};
-`;
-
-const Timeline = styled.div`
+const SkillsTitle = styled.h4`
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  color: ${props => props.theme.syntax?.function || 'var(--heading-color)'};
+  font-weight: 600;
   position: relative;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 20px;
-    height: 100%;
-    width: 2px;
-    background-color: ${props => props.theme.border};
-  }
-`;
-
-const TimelineItem = styled.div`
-  position: relative;
-  padding-bottom: 30px;
-  padding-left: 60px;
-  
-  &:last-child {
-    padding-bottom: 0;
-  }
-`;
-
-const TimelineDot = styled.div`
-  position: absolute;
-  top: 0;
-  left: 13px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background-color: ${props => props.theme.primary};
-  z-index: 1;
-`;
-
-const TimelineContent = styled.div`
-  background-color: ${props => props.theme.card.background};
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  border: 1px solid ${props => props.theme.border};
-`;
-
-const TimelineTitle = styled.h4`
-  font-size: 1.2rem;
-  margin-bottom: 8px;
-  color: ${props => props.theme.foreground};
-`;
-
-const TimelineDate = styled.p`
-  font-size: 0.9rem;
-  color: ${props => props.theme.syntax.comment};
-  margin-bottom: 15px;
-`;
-
-const TimelineDescription = styled.div`
-  ul {
-    padding-left: 20px;
-  }
-  
-  li {
-    margin-bottom: 8px;
-    line-height: 1.5;
-  }
-`;
-
-const EducationContainer = styled.div`
-  margin-top: 60px;
-  padding: 60px 0;
-  background-color: transparent;
-  border-radius: 16px;
-`;
-
-const EducationTitle = styled.h3`
-  font-size: 1.5rem;
-  margin-bottom: 40px;
-  text-align: center;
-  color: ${props => props.theme.syntax.variable};
-  position: relative;
+  display: inline-block;
   
   &:after {
     content: '';
     position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background-color: ${props => props.theme.primary};
-    border-radius: 3px;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: ${props => props.theme.primary || 'var(--primary-color)'};
+    opacity: 0.6;
   }
 `;
 
-const EducationContent = styled(motion.div)`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto;
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
+const SkillsContainer = styled.div`
+  margin-top: 2rem;
+  margin-bottom: 3rem;
 `;
 
-const EducationCardWrapper = styled(motion.div)`
-  width: 100%;
-  height: 100%;
+const SkillCategory = styled.div`
+  margin-bottom: 2rem;
 `;
 
-const EducationCard = styled.div`
+const SkillCategoryTitle = styled.h5`
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  color: ${props => props.theme.syntax?.function || 'var(--heading-color)'};
+`;
+
+const SkillsGrid = styled.div`
   display: flex;
-  height: 100%;
-  background-color: ${props => props.theme.card.background};
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-  border: 1px solid ${props => props.theme.border};
-  transition: all 0.3s ease;
-  position: relative;
-  
-  &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
-    border-color: ${props => 
-      props.isCertification ? 
-      props.theme.secondary : 
-      props.theme.primary};
-  }
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 6px;
-    border-top-right-radius: 12px;
-    border-bottom-right-radius: 12px;
-  }
+  flex-wrap: wrap;
+  gap: 0.75rem;
 `;
 
-const EducationInfo = styled.div`
-  padding: 20px;
-  flex: 1;
-`;
-
-const EducationHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-`;
-
-const EducationTypeTag = styled.div`
+const SkillCard = styled(motion.div)`
   display: inline-flex;
+  flex-direction: row;
   align-items: center;
-  gap: 5px;
-  padding: 6px 12px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  border-radius: 50px;
-  background-color: ${props => 
-    props.isCertification ? 
-    `${props.theme.secondary}20` : 
-    `${props.theme.primary}20`};
-  color: ${props => 
-    props.isCertification ? 
-    props.theme.secondary : 
-    props.theme.primary};
-  box-shadow: 0 2px 5px ${props => 
-    props.isCertification ? 
-    `${props.theme.secondary}30` : 
-    `${props.theme.primary}30`};
-  margin-bottom: 5px;
-`;
-
-const EducationDegree = styled.h4`
-  font-size: 1.3rem;
-  margin-bottom: 12px;
-  color: ${props => props.theme.foreground};
-  font-weight: 600;
-  line-height: 1.4;
-  letter-spacing: 0.01em;
-  
-  @media (max-width: 768px) {
-    font-size: 1.2rem;
-  }
-`;
-
-const EducationSchool = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 1rem;
-  margin-bottom: 10px;
-  color: ${props => props.theme.syntax.function};
+  justify-content: flex-start;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  background: none;
+  border-radius: 8px;
+  border: 1px solid ${props => props.theme.primary || 'var(--primary-color, #d1d5db)'};
+  box-shadow: none;
+  color: ${props => props.theme.primary || 'var(--primary-color)'};
   font-weight: 500;
-  
-  svg {
-    color: ${props => props.theme.primary};
-    min-width: 14px;
-  }
-`;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  margin-bottom: 0.5rem;
+  height: 40px;
+  min-height: 40px;
+  max-height: 40px;
+  max-width: 100%;
 
-const EducationPeriod = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.9rem;
-  color: ${props => props.theme.syntax.comment};
-  margin-bottom: 12px;
-  
-  svg {
-    color: ${props => props.theme.primary};
-    min-width: 14px;
+  &:hover {
+    background-color: ${props => props.theme.primary || 'var(--primary-color)'};
+    color: ${props => props.theme.card?.background || 'var(--bg-color)'};
+    border-color: ${props => props.theme.primary || 'var(--primary-color)'};
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(${props => 
+      props.theme.primary 
+        ? props.theme.name === 'dark' 
+          ? '0, 255, 0' 
+          : '0, 102, 204' 
+        : 'var(--primary-color-rgb)'}, 0.3);
   }
-`;
 
-const EducationDetail = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.95rem;
-  color: ${props => props.theme.foreground};
-  margin-bottom: 8px;
-  
   span {
-    font-weight: 600;
-    color: ${props => props.theme.syntax.variable};
-    display: flex;
-    align-items: center;
-    gap: 5px;
+    text-align: left;
+    font-size: 0.95rem;
+    color: inherit;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  svg {
+    font-size: 1.35rem;
+    color: inherit;
+    min-width: 1.35rem;
+    min-height: 1.35rem;
+    max-width: 1.35rem;
+    max-height: 1.35rem;
+    margin-right: 0.4rem;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    height: 36px;
+    min-height: 36px;
+    max-height: 36px;
+    font-size: 0.95rem;
+    padding: 0.3rem 0.7rem;
+
+    svg {
+      font-size: 1.1rem;
+      min-width: 1.1rem;
+      min-height: 1.1rem;
+      max-width: 1.1rem;
+      max-height: 1.1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    height: 32px;
+    min-height: 32px;
+    max-height: 32px;
+    font-size: 0.9rem;
+    padding: 0.2rem 0.5rem;
     
     svg {
-      color: ${props => props.theme.primary};
+      font-size: 1rem;
+      min-width: 1rem;
+      min-height: 1rem;
+      max-width: 1rem;
+      max-height: 1rem;
     }
   }
 `;
 
-const EducationDescription = styled.p`
-  font-size: 0.9rem;
-  line-height: 1.6;
-  color: ${props => props.theme.foreground};
-  opacity: 0.9;
-  margin-top: 12px;
-  margin-bottom: 12px;
-border-left: 3px solid ${props => props.theme.border};
-  padding-left: 12px;
+const ExperienceContainer = styled.div`
+  margin-top: 2rem;
 `;
 
-const EducationLocation = styled.div`
+const WorkContainer = styled.div`
   display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.9rem;
-  color: ${props => props.theme.syntax.variable};
-  margin-bottom: 10px;
+  align-items: flex-start;
+  position: relative;
   
-  svg {
-    color: ${props => props.theme.secondary};
-    min-width: 14px;
+  @media (max-width: 768px) {
+    flex-direction: column;
   }
 `;
 
-const InterestsContainer = styled.div`
-  margin-bottom: 30px;
+const CompaniesColumn = styled.div`
+  width: 200px;
+  position: relative;
+  z-index: 3;
+  
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    overflow-x: auto;
+  }
 `;
 
-const InterestsTitle = styled.h3`
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-  color: ${props => props.theme.syntax.variable};
+const ContentColumn = styled.div`
+  flex: 1;
+  position: relative;
+  
+  @media (max-width: 768px) {
+    padding-left: 0;
+  }
 `;
 
-const InterestsList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-`;
-
-const InterestItem = styled.span`
-  background-color: ${props => props.theme.card.background};
-  color: ${props => props.theme.foreground};
-  padding: 0.5rem 1.2rem;
-  border-radius: 30px;
-  font-size: 0.9rem;
+const CompanyButton = styled.div`
+  width: 100%;
+  height: auto;
+  padding: 10px 20px;
+  text-align: left;
+  background-color: transparent;
+  color: ${props => props.isActive ? props.theme.primary || '#64ffda' : props.theme.foreground || '#8892b0'};
+  font-size: 1rem;
   font-weight: 500;
-  border: 1px solid ${props => props.theme.border};
+  position: relative;
+  cursor: pointer;
+  border-left: 2px solid ${props => props.isActive ? props.theme.primary || '#64ffda' : 'rgba(255, 255, 255, 0.1)'};
+  transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: ${props => props.isActive ? props.theme.primary || '#64ffda' : props.theme.foreground || '#ccd6f6'};
+  }
+  
+  @media (max-width: 768px) {
+    border-left: none;
+    border-bottom: 2px solid ${props => props.isActive ? props.theme.primary || '#64ffda' : 'rgba(255, 255, 255, 0.1)'};
+    min-width: 150px;
+    text-align: center;
+  }
+`;
+
+const ContentPanel = styled(motion.div)`
+  background-color: transparent;
+  padding: 10px 20px;
+  
+  @media (max-width: 768px) {
+    padding: 20px 10px;
+  }
+`;
+
+const JobTitle = styled.h3`
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: ${props => props.theme.foreground || '#ccd6f6'};
+  margin-bottom: 5px;
+  line-height: 1.3;
+`;
+
+const CompanySpan = styled.span`
+  color: ${props => props.theme.primary || '#64ffda'};
+`;
+
+const JobDate = styled.p`
+  font-size: 0.9rem;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  color: ${props => props.theme.syntax?.comment || '#8892b0'};
+  margin-bottom: 25px;
+`;
+
+const BulletList = styled(motion.ul)`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`;
+
+const BulletItem = styled(motion.li)`
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  line-height: 1.5;
+`;
+
+const BulletArrow = styled.span`
+  color: ${props => props.theme.primary || '#64ffda'};
+  margin-right: 10px;
+  font-size: 1.1rem;
+  line-height: 1.5;
+`;
+
+const BulletContent = styled.span`
+  color: ${props => props.theme.foreground || '#8892b0'};
 `;
 
 export default About;

@@ -33,7 +33,7 @@ const resumeData = {
     },
     {
       title: "React Full Stack Developer",
-      company: "Sony (Client)",
+      company: "Sony",
       location: "",
       period: "May 2022 – Jun 2023",
       bullets: [
@@ -60,7 +60,7 @@ const resumeData = {
       name: "Job Matrix",
       links: {
         live: "https://jobmatrixapp.netlify.app",
-        github: "https://github.com/RANJITH-REDDY-N/JobMatrixFrontend"
+        github: "https://github.com/deepika-penmetsa/JobMatrixFrontend"
       },
       image: jobmatrixImage,
       description: [
@@ -73,7 +73,7 @@ const resumeData = {
     {
       name: "Elevate",
       links: {
-        github: "https://github.com/Deepika130599/StudentClubManagment"
+        github: "https://github.com/deepika-penmetsa/StudentClubManagment"
       },
       image: elevateImage,
       description: [
@@ -86,7 +86,7 @@ const resumeData = {
       name: "IPL Dashboard",
       links: {
         live: "https://imaginative-pithivier-21ee16.netlify.app",
-        github: "https://github.com/Deepika130599/IPL_Dashboard"
+        github: "https://github.com/deepika-penmetsa/IPL_Dashboard"
       },
       image: iplImage,
       description: [
@@ -238,11 +238,19 @@ I'm a Full Stack Developer with a passion for building user-friendly web applica
       "profiles": [
         {
           "network": "LinkedIn",
-          "url": "https://www.linkedin.com/in/deepika-penmetsa-59a8911b1/"
+          "url": "https://www.linkedin.com/in/deepika-penmetsa/"
         },
         {
           "network": "GitHub",
-          "url": "https://github.com/Deepika130599"
+          "url": "https://github.com/deepika-penmetsa"
+        },
+        {
+          "network": "Email",
+          "url": "deepika.penmetsa321@gmail.com"
+        },
+        {
+          "network": "Leetcode",
+          "url": "https://leetcode.com/u/deepikapenmetsa/"
         }
       ],
       "message": "I'm currently open to new opportunities. Feel free to reach out if you'd like to discuss potential collaborations!"

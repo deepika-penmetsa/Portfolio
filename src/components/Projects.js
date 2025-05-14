@@ -13,7 +13,7 @@ const Projects = ({ resumeData }) => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: resumeData.projects.length > 2 ? 2 : 1,
+    slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 5000,
@@ -38,8 +38,14 @@ const Projects = ({ resumeData }) => {
     sliderRef.current.slickPrev();
   };
 
+  // Function to convert bullet points into a single paragraph
+  const formatDescription = (descriptions) => {
+    if (!descriptions || descriptions.length === 0) return '';
+    return descriptions.join(' ');
+  };
+
   return (
-    <ProjectsContainer>
+    <ProjectsContainer id="projects">
       <div className="container">
         <SectionHeader>
           <SectionTitle>My Projects</SectionTitle>
@@ -47,25 +53,21 @@ const Projects = ({ resumeData }) => {
         </SectionHeader>
         
         <ProjectsSliderContainer>
-          {resumeData.projects.length > 1 && (
-            <>
-              <CarouselButton 
-                onClick={prevSlide} 
-                className="prev-button"
-                aria-label="Previous project"
-              >
-                <FaChevronLeft />
-              </CarouselButton>
-              
-              <CarouselButton 
-                onClick={nextSlide} 
-                className="next-button"
-                aria-label="Next project"
-              >
-                <FaChevronRight />
-              </CarouselButton>
-            </>
-          )}
+          <NavButton 
+            className="prev" 
+            onClick={prevSlide} 
+            aria-label="Previous project"
+          >
+            <FaChevronLeft />
+          </NavButton>
+          
+          <NavButton 
+            className="next" 
+            onClick={nextSlide} 
+            aria-label="Next project"
+          >
+            <FaChevronRight />
+          </NavButton>
           
           <ProjectsSliderWrapper>
             <Slider ref={sliderRef} {...settings}>
@@ -74,76 +76,43 @@ const Projects = ({ resumeData }) => {
                   <ProjectCard>
                     <ProjectImageContainer>
                       <ProjectImage src={project.image} alt={project.name} />
-                      <ProjectOverlay>
-                        <ProjectLinks className="overlay-links">
+                      
+                      <MiddleSection>
+                        <ProjectTitle>{project.name.toLowerCase()}</ProjectTitle>
+                        <ProjectDescription>
+                          {formatDescription(project.description)}
+                        </ProjectDescription>
+                      </MiddleSection>
+                      
+                      <BottomSection>
+                        <ActionButtonsContainer>
                           {project.links && project.links.github && (
-                            <OverlayLink 
+                            <ActionButton 
                               href={project.links.github} 
                               target="_blank" 
                               rel="noopener noreferrer"
-                              title="View code on GitHub"
                             >
-                              <FaGithub size={20} />
-                            </OverlayLink>
+                              <FaGithub size={18} />
+                            </ActionButton>
                           )}
-                          
                           {project.links && project.links.live && (
-                            <OverlayLink 
-                              href={project.links.live} 
-                              target="_blank" 
+                            <ActionButton 
+                              href={project.links.live}
+                              target="_blank"
                               rel="noopener noreferrer"
-                              title="View live demo"
-                              data-primary="true"
+                              primary="true"
                             >
-                              <RiExternalLinkLine size={20} />
-                            </OverlayLink>
+                              <RiExternalLinkLine size={18} />
+                            </ActionButton>
                           )}
-                        </ProjectLinks>
-                      </ProjectOverlay>
+                        </ActionButtonsContainer>
+                        <TechLabel>
+                          {project.technologies && project.technologies.length > 0 
+                            ? project.technologies.join(', ').toUpperCase()
+                            : 'REACT JS, JAVASCRIPT'}
+                        </TechLabel>
+                      </BottomSection>
                     </ProjectImageContainer>
-                    
-                    <ProjectContent>
-                      <ProjectTitle>{project.name}</ProjectTitle>
-                      
-                      <ProjectTags>
-                        {project.technologies && project.technologies.map((tech, techIndex) => (
-                          <ProjectTag key={techIndex}>{tech}</ProjectTag>
-                        ))}
-                      </ProjectTags>
-                      
-                      <ProjectDescription>
-                        {project.description && project.description.map((desc, descIndex) => (
-                          <p key={descIndex}>{desc}</p>
-                        ))}
-                      </ProjectDescription>
-                      
-                      <ProjectLinks className="footer-links">
-                        {project.links && project.links.github && (
-                          <ProjectLink 
-                            href={project.links.github} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            title="View code on GitHub"
-                          >
-                            <FaGithub size={18} />
-                            <span>Code</span>
-                          </ProjectLink>
-                        )}
-                        
-                        {project.links && project.links.live && (
-                          <ProjectLink 
-                            href={project.links.live} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            title="View live demo"
-                            data-primary="true"
-                          >
-                            <RiExternalLinkLine size={18} />
-                            <span>Demo</span>
-                          </ProjectLink>
-                        )}
-                      </ProjectLinks>
-                    </ProjectContent>
                   </ProjectCard>
                 </ProjectCardWrapper>
               ))}
@@ -156,127 +125,172 @@ const Projects = ({ resumeData }) => {
 };
 
 const ProjectsContainer = styled.div`
-  padding: 80px 0 120px;
-  background-color: ${props => 
-    props.theme.name === 'dark' 
-      ? props.theme.background 
-      : props.theme.section.background};
   position: relative;
+  padding: 80px 0 120px;
+  background-color: ${props => props.theme.background || '#0a192f'};
+  
+  @media (max-width: 768px) {
+    padding: 60px 0 100px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 40px 0 80px;
+  }
 `;
 
 const SectionHeader = styled.div`
   text-align: center;
   margin-bottom: 60px;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: ${props => props.theme.name === 'dark'
+      ? 'linear-gradient(to right, #00FF00, rgba(0, 255, 0, 0.1))'
+      : 'linear-gradient(to right, #0366D6, rgba(3, 102, 214, 0.1))'};
+    border-radius: 3px;
+  }
+  
+  @media (max-width: 768px) {
+    margin-bottom: 40px;
+  }
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   font-weight: 700;
-  color: ${props => props.theme.syntax.function};
-  margin-bottom: 0.5rem;
+  color: ${props => props.theme.name === 'dark' 
+    ? '#00FF00' 
+    : props.theme.syntax?.function || '#0366D6'};
+  margin-bottom: 0.8rem;
+  position: relative;
+  display: inline-block;
+  text-shadow: ${props => props.theme.name === 'dark' 
+    ? '0 0 10px rgba(0, 255, 0, 0.3)' 
+    : '0 0 10px rgba(3, 102, 214, 0.3)'};
+  
+  @media (max-width: 768px) {
+    font-size: 2.2rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 2rem;
+  }
 `;
 
 const SectionSubtitle = styled.p`
-  font-size: 1.1rem;
-  color: ${props => props.theme.foreground};
-  opacity: 0.8;
+  font-size: 1.2rem;
+  color: ${props => props.theme.name === 'dark'
+    ? 'rgba(255, 255, 255, 0.9)'
+    : props.theme.foreground || 'rgba(36, 41, 46, 0.9)'};
+  opacity: 0.9;
+  font-weight: 500;
+  
+  @media (max-width: 480px) {
+    font-size: 1.1rem;
+  }
 `;
 
 const ProjectsSliderContainer = styled.div`
   position: relative;
-  max-width: 1200px;
+  width: 100%;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 0 60px;
-  
-  .prev-button {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 20;
+  height: 500px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: ${props => props.theme.name === 'dark' 
+    ? '0 20px 50px rgba(0, 100, 0, 0.2), 0 0 30px rgba(0, 255, 0, 0.1)' 
+    : '0 20px 50px rgba(0, 0, 0, 0.2), 0 0 30px rgba(3, 102, 214, 0.1)'};
+  transition: box-shadow 0.3s ease;
+
+  .prev {
+    left: 20px;
   }
   
-  .next-button {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 20;
+  .next {
+    right: 20px;
+  }
+  
+  @media (max-width: 1100px) {
+    margin: 0 40px;
   }
   
   @media (max-width: 768px) {
-    padding: 0 50px;
-  }
-  
-  @media (max-width: 480px) {
-    padding: 0 40px;
+    height: 400px;
+    margin: 0 20px;
   }
 `;
 
 const ProjectsSliderWrapper = styled.div`
-  margin: 0 auto;
+  height: 100%;
   
-  .slick-track {
-    display: flex !important;
+  .slick-slider, .slick-list, .slick-track {
+    height: 100%;
   }
   
-  .slick-slide {
-    height: inherit !important;
-    padding: 10px;
-    
-    & > div {
-      height: 100%;
-    }
+  .slick-slide > div {
+    height: 100%;
   }
   
   .slick-dots {
-    bottom: -40px;
+    bottom: 20px;
+    z-index: 10;
     
     li button:before {
-      color: ${props => props.theme.primary};
+      color: white;
       opacity: 0.5;
       font-size: 10px;
     }
     
     li.slick-active button:before {
-      color: ${props => props.theme.primary};
+      color: ${props => props.theme.name === 'dark' ? '#00FF00' : 'white'};
       opacity: 1;
     }
   }
 `;
 
-const CarouselButton = styled.button`
-  width: 40px;
-  height: 40px;
+const NavButton = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
+  border: none;
+  background-color: ${props => props.theme.name === 'dark' 
+    ? 'rgba(0, 100, 0, 0.7)' 
+    : 'rgba(3, 102, 214, 0.7)'};
+  color: white;
+  font-size: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${props => props.theme.card.background};
-  color: ${props => props.theme.foreground};
-  border: 1px solid ${props => props.theme.border};
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0.7;
   
   &:hover {
-    background-color: ${props => props.theme.primary};
-    color: white;
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+    background-color: ${props => props.theme.name === 'dark' 
+      ? 'rgba(0, 170, 0, 0.8)' 
+      : 'rgba(3, 102, 214, 0.8)'};
+    box-shadow: 0 0 15px ${props => props.theme.name === 'dark' 
+      ? 'rgba(0, 255, 0, 0.5)' 
+      : 'rgba(3, 102, 214, 0.5)'};
   }
   
   svg {
-    width: 16px;
-    height: 16px;
-  }
-  
-  @media (max-width: 480px) {
-    width: 32px;
-    height: 32px;
-    
-    svg {
-      width: 14px;
-      height: 14px;
-    }
+    width: 24px;
+    height: 24px;
   }
 `;
 
@@ -285,189 +299,192 @@ const ProjectCardWrapper = styled.div`
 `;
 
 const ProjectCard = styled.div`
-  background-color: ${props => props.theme.card.background};
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  border: 1px solid ${props => props.theme.border};
-  transition: all 0.3s ease;
   position: relative;
   height: 100%;
-  min-height: 500px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
   
-  &:hover {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    border-color: ${props => props.theme.primary};
-    
-    img {
-      transform: scale(1.05);
-    }
-    
-    .overlay-links {
-      opacity: 1;
-    }
-  }
-
-  @media (max-width: 768px) {
-    min-height: auto;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: ${props => props.theme.name === 'dark' 
+      ? 'linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.5) 100%)'
+      : 'linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.4) 100%)'};
+    z-index: 2;
+    pointer-events: none;
+    border-radius: 16px;
   }
 `;
 
 const ProjectImageContainer = styled.div`
   width: 100%;
-  height: 220px;
-  overflow: hidden;
+  height: 100%;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 1;
 `;
 
 const ProjectImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
-`;
-
-const ProjectOverlay = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.7));
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 20px;
-  transition: all 0.3s ease;
-  z-index: 10;
+  z-index: 1;
+  filter: ${props => props.theme.name === 'dark' ? 'brightness(0.6)' : 'brightness(0.7)'};
+  transition: filter 0.5s ease;
+  
+  ${ProjectCard}:hover & {
+    filter: ${props => props.theme.name === 'dark' ? 'brightness(0.7)' : 'brightness(0.8)'};
+  }
 `;
 
-const ProjectContent = styled.div`
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+const MiddleSection = styled.div`
+  position: relative;
+  z-index: 3;
+  padding: 0 40px;
+  margin: auto 0;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 20px 40px;
+  backdrop-filter: blur(2px);
 `;
 
 const ProjectTitle = styled.h3`
-  font-size: 1.4rem;
-  margin-bottom: 15px;
-  color: ${props => props.theme.foreground};
+  font-size: 3.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: white;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  opacity: 1;
+  
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
 `;
 
 const ProjectDescription = styled.div`
-  font-size: 0.95rem;
-  color: ${props => props.theme.foreground};
-  opacity: 0.9;
-  margin-bottom: 20px;
+  font-size: 1.1rem;
   line-height: 1.6;
-  flex-grow: 1;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 800px;
+  margin: 0 auto 30px;
+  text-align: center;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  opacity: 0.9;
+  transform: translateY(0);
+  transition: opacity 0.5s ease;
   
-  p {
-    margin-bottom: 1rem;
+  ${ProjectCard}:hover & {
+    opacity: 1;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    overflow-y: auto;
+    padding: 0 10px;
     
-    &:last-child {
-      margin-bottom: 0;
+    /* Custom scrollbar for small screens */
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
     }
   }
 `;
 
-const ProjectTags = styled.div`
+const BottomSection = styled.div`
+  position: relative;
+  z-index: 3;
+  padding: 20px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  background: ${props => props.theme.name === 'dark'
+    ? 'linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent)'
+    : 'linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent)'
+  };
+  opacity: 0.9;
+  transform: translateY(0);
+  transition: opacity 0.5s ease;
+  
+  ${ProjectCard}:hover & {
+    opacity: 1;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+`;
+
+const ActionButtonsContainer = styled.div`
+  display: flex;
+  gap: 15px;
   margin-bottom: 15px;
 `;
 
-const ProjectTag = styled.span`
-  font-size: 0.8rem;
-  padding: 4px 10px;
-  border-radius: 15px;
-  background-color: ${props => 
-    props.theme.name === 'dark'
-      ? 'rgba(86, 156, 214, 0.15)'
-      : 'rgba(3, 102, 214, 0.1)'
-  };
-  color: ${props => props.theme.syntax.variable};
-`;
-
-const ProjectLinks = styled.div`
-  display: flex;
-  gap: 15px;
-  margin-top: auto;
-  
-  &.overlay-links {
-    display: none;
-    
-    @media (max-width: 480px) {
-      gap: 10px;
-    }
-  }
-`;
-
-const ProjectLink = styled.a`
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 5px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  background-color: ${props => 
-    props['data-primary']
-      ? props.theme.primary
-      : props.theme.card.background};
-  color: ${props => 
-    props['data-primary']
-      ? 'white'
-      : props.theme.foreground};
-  border: 1px solid ${props => 
-    props['data-primary']
-      ? props.theme.primary
-      : props.theme.border};
-  
-  &:hover {
-    background-color: ${props => 
-      props['data-primary']
-        ? props.theme.secondary
-        : props.theme.card.hoverBackground};
-  }
-  
-  svg {
-    width: 16px;
-    height: 16px;
-  }
-`;
-
-const OverlayLink = styled.a`
+const ActionButton = styled.a`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.9);
-  color: ${props => props.theme.primary};
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   
   &:hover {
-    background-color: ${props => props.theme.primary};
+    background-color: ${props => props.theme.name === 'dark'
+      ? 'rgba(0, 170, 0, 0.9)'
+      : 'rgba(3, 102, 214, 0.9)'};
     color: white;
-    transform: translateY(-2px);
-  }
-  
-  &[data-primary="true"] {
-    background-color: ${props => props.theme.primary};
-    color: white;
-  }
-  
-  &[data-primary="true"]:hover {
-    background-color: ${props => props.theme.secondary};
+    border-color: transparent;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
   }
 `;
 
-export default Projects; 
+const TechLabel = styled.div`
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  color: white;
+  padding: 6px 16px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+  font-weight: 600;
+  border-radius: 20px;
+  background: ${props => props.theme.name === 'dark'
+    ? 'rgba(0, 100, 0, 0.8)'
+    : 'rgba(3, 102, 214, 0.8)'
+  };
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+`;
+
+export default Projects;

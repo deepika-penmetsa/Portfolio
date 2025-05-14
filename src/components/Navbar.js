@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { FiSun, FiMoon } from 'react-icons/fi';
+import { FaGithub, FaLinkedin, FaEnvelope, FaPencilAlt } from 'react-icons/fa';
 
 const Navbar = ({ activeSection, setActiveSection, currentTheme, toggleTheme }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -46,11 +47,11 @@ const Navbar = ({ activeSection, setActiveSection, currentTheme, toggleTheme }) 
   return (
     <NavbarContainer data-scrolled={scrolled} ref={navRef}>
       <NavbarContent>
-        <Logo onClick={() => handleNavClick('home')}>
-          <span>&lt;</span>Deepika<span>/&gt;</span>
-        </Logo>
-        
-        <RightContainer>
+        <LeftSection>
+          <Logo onClick={() => handleNavClick('home')}>
+            <span>&lt;</span>Deepika<span>/&gt;</span>
+          </Logo>
+          
           <NavLinks 
             open={menuOpen}
             onMouseEnter={handleMouseEnter}
@@ -81,22 +82,40 @@ const Navbar = ({ activeSection, setActiveSection, currentTheme, toggleTheme }) 
               Contact
             </NavItem>
           </NavLinks>
+        </LeftSection>
+        
+        <RightSection>
+          <SocialLinks>
+            <SocialLink href="mailto:deepika.penmetsa321@gmail.com" aria-label="Email">
+              <Icon>
+                <FaEnvelope />
+              </Icon>
+            </SocialLink>
+            <SocialLink href="https://github.com/deepika-penmetsa" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <Icon>
+                <FaGithub />
+              </Icon>
+            </SocialLink>
+            <SocialLink href="https://www.linkedin.com/in/deepika-penmetsa/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <Icon>
+                <FaLinkedin />
+              </Icon>
+            </SocialLink>
+          </SocialLinks>
           
-          <NavControls>
-            <ThemeToggleButton onClick={toggleTheme}>
-              {currentTheme === 'dark' ? <FiSun size={22} /> : <FiMoon size={22} />}
-            </ThemeToggleButton>
-            
-            <MenuToggle 
-              onClick={() => setMenuOpen(!menuOpen)}
-              onMouseEnter={handleMouseEnter}
-            >
-              <span></span>
-              <span></span>
-              <span></span>
-            </MenuToggle>
-          </NavControls>
-        </RightContainer>
+          <ThemeToggleButton onClick={toggleTheme} aria-label={currentTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+            {currentTheme === 'dark' ? <FiSun size={20} /> : <FiMoon size={20} />}
+          </ThemeToggleButton>
+          
+          <MenuToggle 
+            onClick={() => setMenuOpen(!menuOpen)}
+            onMouseEnter={handleMouseEnter}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </MenuToggle>
+        </RightSection>
       </NavbarContent>
     </NavbarContainer>
   );
@@ -127,27 +146,61 @@ const NavbarContent = styled.div`
   margin: 0 auto;
 `;
 
-const RightContainer = styled.div`
+const LeftSection = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const RightSection = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 15px;
 `;
 
 const Logo = styled.div`
   font-size: 1.5rem;
   font-weight: 700;
   cursor: pointer;
-  color: ${props => props.theme.syntax.function};
+  color: ${props => props.theme.syntax?.function || props.theme.foreground};
+  margin-right: 2rem;
   
   span {
     color: ${props => props.theme.primary};
   }
+  
+  @media (max-width: 768px) {
+    margin-right: 0;
+  }
 `;
 
-const NavControls = styled.div`
+const SocialLinks = styled.div`
   display: flex;
   align-items: center;
   gap: 15px;
-  margin-left: 15px;
+  
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const Icon = styled.div`
+  display: flex;
+  color: ${props => props.theme.primary};
+  font-size: 1.25rem;
+  transition: all 0.3s ease;
+`;
+
+const SocialLink = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    ${Icon} {
+      transform: translateY(-3px);
+    }
+  }
 `;
 
 const NavLinks = styled.ul`
@@ -194,7 +247,7 @@ const NavItem = styled.li`
     transform: scaleX(1);
   }
   
-  color: ${props => props['data-active'] ? props.theme.navbar.activeForeground : props.theme.navbar.foreground};
+  color: ${props => props['data-active'] ? props.theme.navbar?.activeForeground || props.theme.foreground : props.theme.navbar?.foreground || props.theme.foreground};
   cursor: pointer;
   transition: color 0.3s;
   font-weight: ${props => props['data-active'] ? '600' : '400'};
@@ -226,7 +279,7 @@ const MenuToggle = styled.div`
   span {
     width: 100%;
     height: 3px;
-    background-color: ${props => props.theme.navbar.foreground};
+    background-color: ${props => props.theme.navbar?.foreground || props.theme.foreground};
     border-radius: 3px;
     transition: transform 0.3s, opacity 0.3s;
   }
@@ -237,32 +290,26 @@ const MenuToggle = styled.div`
 `;
 
 const ThemeToggleButton = styled.button`
-  background: ${props => props.theme.name === 'dark' ? 'rgba(0, 255, 0, 0.1)' : 'rgba(3, 102, 214, 0.1)'};
-  border: 1px solid ${props => props.theme.name === 'dark' ? '#00AA00' : props.theme.primary};
-  color:  ${props => props.theme.name === 'dark' ? '#00AA00' : props.theme.primary};
+  background: none;
+  border: none;
+  color: ${props => props.theme.primary};
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 36px;
   height: 36px;
-  border-radius: 50%;
   transition: all 0.3s ease;
   padding: 0;
   
   &:hover {
-    background-color: ${props => props.theme.name === 'dark' ? 'rgba(0, 255, 0, 0.2)' : 'rgba(3, 102, 214, 0.2)'};
-    color: ${props => props.theme.name === 'dark' ? '#00FF00' : props.theme.primary};
     transform: scale(1.1);
+    background-color: ${props => props.theme.primary};
+    color: ${props => props.theme.navbar?.foreground || props.theme.foreground};
   }
   
   &:focus {
     outline: none;
-  }
-  
-  svg {
-    width: 20px;
-    height: 20px;
   }
 `;
 

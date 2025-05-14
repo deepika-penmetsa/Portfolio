@@ -92,7 +92,7 @@ export const vscodeLightTheme = {
     string: '#032F62',
     number: '#005CC5',
     comment: '#6A737D',
-    function: '#6F42C1',
+    function: '#003d5b',
     class: '#22863A',
     variable: '#24292E',
     tag: '#22863A',

@@ -8,6 +8,7 @@ import {
   MdOpenInNew
 } from 'react-icons/md';
 import { FaLinkedin, FaGithub, FaFileAlt } from 'react-icons/fa';
+import { SiLeetcode } from "react-icons/si";
 
 const Contact = ({ resumeData }) => {
   const resumePath = '/assets/Deepika_Penmetsa_Resume.pdf';
@@ -88,6 +89,8 @@ const Contact = ({ resumeData }) => {
                     >
                       {profile.network === 'LinkedIn' ? <FaLinkedin /> : null}
                       {profile.network === 'GitHub' ? <FaGithub /> : null}
+                      {profile.network === 'Email' ? <MdEmail /> : null}
+                      {profile.network === 'Leetcode' ? <SiLeetcode /> : null}
                     </SocialLink>
                   ))
                 : resumeData.social && resumeData.social.map((profile, index) => (
@@ -100,6 +103,8 @@ const Contact = ({ resumeData }) => {
                     >
                       {profile.network === 'LinkedIn' ? <FaLinkedin /> : null}
                       {profile.network === 'GitHub' ? <FaGithub /> : null}
+                      {profile.network === 'Email' ? <MdEmail /> : null}
+                      {profile.network === 'Leetcode' ? <SiLeetcode /> : null}
                     </SocialLink>
                   ))
               }
