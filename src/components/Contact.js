@@ -259,7 +259,7 @@ const ContactIcon = styled.div`
   }
 `;
 
-const ContactInfoValue = styled.p`
+const ContactInfoValue = styled.div`
   margin-top: auto;
   margin-bottom: auto;
   font-size: 1rem;

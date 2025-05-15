@@ -2,11 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { FiSun, FiMoon } from 'react-icons/fi';
 import { FaGithub, FaLinkedin, FaEnvelope, FaPencilAlt } from 'react-icons/fa';
+import { LuMoonStar, LuSun } from "react-icons/lu";
+import { FaMoon , FaSun} from "react-icons/fa";
+import { BiSun, BiMoon } from 'react-icons/bi';
 
 const Navbar = ({ activeSection, setActiveSection, currentTheme, toggleTheme }) => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const navRef = useRef(null);
+  const menuRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +26,23 @@ const Navbar = ({ activeSection, setActiveSection, currentTheme, toggleTheme }) 
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    // Handle clicks outside the menu to close it
+    const handleClickOutside = (event) => {
+      if (menuOpen && 
+          menuRef.current && 
+          !menuRef.current.contains(event.target) &&
+          !event.target.closest('.menu-toggle')) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [menuOpen]);
 
   const handleNavClick = (sectionId) => {
     setActiveSection(sectionId);
@@ -40,43 +61,50 @@ const Navbar = ({ activeSection, setActiveSection, currentTheme, toggleTheme }) 
 
   const handleMouseLeave = () => {
     if (window.innerWidth <= 768) {
-      setMenuOpen(false);
+      // Don't auto-close on mouse leave for better mobile UX
+      // setMenuOpen(false);
     }
   };
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
-    <NavbarContainer data-scrolled={scrolled} ref={navRef}>
+    <NavbarContainer $scrolled={scrolled} ref={navRef}>
       <NavbarContent>
         <LeftSection>
           <Logo onClick={() => handleNavClick('home')}>
-            <span>&lt;</span>Deepika<span>/&gt;</span>
+            <FullName><span>&lt;</span>Deepika<span>/&gt;</span></FullName>
+            <Initials><span>&lt;</span>DP<span>/&gt;</span></Initials>
           </Logo>
           
           <NavLinks 
             open={menuOpen}
+            ref={menuRef}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
             <NavItem 
-              data-active={activeSection === 'home'} 
+              $isActive={activeSection === 'home'} 
               onClick={() => handleNavClick('home')}
             >
               Home
             </NavItem>
             <NavItem 
-              data-active={activeSection === 'about'} 
+              $isActive={activeSection === 'about'} 
               onClick={() => handleNavClick('about')}
             >
               About
             </NavItem>
             <NavItem 
-              data-active={activeSection === 'projects'} 
+              $isActive={activeSection === 'projects'} 
               onClick={() => handleNavClick('projects')}
             >
               Projects
             </NavItem>
             <NavItem 
-              data-active={activeSection === 'contact'} 
+              $isActive={activeSection === 'contact'} 
               onClick={() => handleNavClick('contact')}
             >
               Contact
@@ -88,28 +116,35 @@ const Navbar = ({ activeSection, setActiveSection, currentTheme, toggleTheme }) 
           <SocialLinks>
             <SocialLink href="mailto:deepika.penmetsa321@gmail.com" aria-label="Email">
               <Icon>
-                <FaEnvelope />
+                <FaEnvelope size={20} />
               </Icon>
             </SocialLink>
             <SocialLink href="https://github.com/deepika-penmetsa" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
               <Icon>
-                <FaGithub />
+                <FaGithub size={20} />
               </Icon>
             </SocialLink>
             <SocialLink href="https://www.linkedin.com/in/deepika-penmetsa/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <Icon>
-                <FaLinkedin />
+                <FaLinkedin size={20} />
               </Icon>
             </SocialLink>
+            <SocialIconButton 
+              onClick={toggleTheme} 
+              className="no-style"
+              aria-label={currentTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              <Icon>
+                {currentTheme === 'dark' ? <FaSun size={20} /> : <FaMoon size={20} />}
+              </Icon>
+            </SocialIconButton>
           </SocialLinks>
           
-          <ThemeToggleButton onClick={toggleTheme} aria-label={currentTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-            {currentTheme === 'dark' ? <FiSun size={20} /> : <FiMoon size={20} />}
-          </ThemeToggleButton>
-          
           <MenuToggle 
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={toggleMenu}
+            className="menu-toggle"
             onMouseEnter={handleMouseEnter}
+            $open={menuOpen}
           >
             <span></span>
             <span></span>
@@ -127,14 +162,14 @@ const NavbarContainer = styled.nav`
   left: 0;
   width: 100%;
   z-index: 1000;
-  background-color: ${props => props['data-scrolled'] 
+  background-color: ${props => props.$scrolled 
     ? props.theme.navbar.background 
     : 'transparent'};
-  box-shadow: ${props => props['data-scrolled'] 
+  box-shadow: ${props => props.$scrolled 
     ? '0 1px 10px rgba(0,0,0,0.1)' 
     : 'none'};
   transition: background-color 0.3s, box-shadow 0.3s;
-  backdrop-filter: ${props => props['data-scrolled'] ? 'blur(10px)' : 'none'};
+  backdrop-filter: ${props => props.$scrolled ? 'blur(10px)' : 'none'};
 `;
 
 const NavbarContent = styled.div`
@@ -144,11 +179,23 @@ const NavbarContent = styled.div`
   padding: 1rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  
+  @media (max-width: 768px) {
+    padding: 0.8rem 1.5rem;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 0.7rem 1rem;
+  }
 `;
 
 const LeftSection = styled.div`
   display: flex;
   align-items: center;
+  
+  @media (max-width: 768px) {
+    flex: 1;
+  }
 `;
 
 const RightSection = styled.div`
@@ -170,6 +217,21 @@ const Logo = styled.div`
   
   @media (max-width: 768px) {
     margin-right: 0;
+    font-size: 1.3rem;
+  }
+`;
+
+const FullName = styled.div`
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const Initials = styled.div`
+  display: none;
+  
+  @media (max-width: 768px) {
+    display: block;
   }
 `;
 
@@ -179,12 +241,16 @@ const SocialLinks = styled.div`
   gap: 15px;
   
   @media (max-width: 768px) {
-    display: none;
+    display: flex;
+    margin-left: auto;
+    margin-right: 15px;
   }
 `;
 
 const Icon = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   color: ${props => props.theme.primary};
   font-size: 1.25rem;
   transition: all 0.3s ease;
@@ -200,6 +266,42 @@ const SocialLink = styled.a`
     ${Icon} {
       transform: translateY(-3px);
     }
+  }
+`;
+
+const SocialIconButton = styled.button`
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    ${Icon} {
+      transform: translateY(-3px);
+    }
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  
+  &:focus {
+    outline: none !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  
+  &:active {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: none !important;
   }
 `;
 
@@ -238,7 +340,7 @@ const NavItem = styled.li`
     bottom: -5px;
     height: 2px;
     background-color: ${props => props.theme.primary};
-    transform: ${props => props['data-active'] ? 'scaleX(1)' : 'scaleX(0)'};
+    transform: ${props => props.$isActive ? 'scaleX(1)' : 'scaleX(0)'};
     transform-origin: left;
     transition: transform 0.3s;
   }
@@ -247,23 +349,29 @@ const NavItem = styled.li`
     transform: scaleX(1);
   }
   
-  color: ${props => props['data-active'] ? props.theme.navbar?.activeForeground || props.theme.foreground : props.theme.navbar?.foreground || props.theme.foreground};
+  color: ${props => props.$isActive ? props.theme.navbar?.activeForeground || props.theme.foreground : props.theme.navbar?.foreground || props.theme.foreground};
   cursor: pointer;
   transition: color 0.3s;
-  font-weight: ${props => props['data-active'] ? '600' : '400'};
+  font-weight: ${props => props.$isActive ? '600' : '400'};
   
   @media (max-width: 768px) {
     margin: 0.5rem 0;
-    padding: 0.5rem 2rem;
+    padding: 0.8rem 2rem;
     width: 100%;
     text-align: center;
+    position: relative;
+    border-left: 3px solid transparent;
+    border-left-color: ${props => props.$isActive ? props.theme.primary : 'transparent'};
+    background-color: ${props => props.$isActive ? 'rgba(0, 0, 0, 0.05)' : 'transparent'};
+    transition: background-color 0.3s, border-left-color 0.3s;
+    
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+      border-left-color: ${props => props.theme.primary};
+    }
     
     &::after {
-      bottom: 0;
-      height: 100%;
-      width: 3px;
-      right: auto;
-      transform: ${props => props['data-active'] ? 'scaleY(1)' : 'scaleY(0)'};
+      display: none;
     }
   }
 `;
@@ -279,37 +387,25 @@ const MenuToggle = styled.div`
   span {
     width: 100%;
     height: 3px;
-    background-color: ${props => props.theme.navbar?.foreground || props.theme.foreground};
+    background-color: ${props => props.theme.primary};
     border-radius: 3px;
     transition: transform 0.3s, opacity 0.3s;
   }
   
+  span:first-child {
+    transform: ${props => props.$open ? 'rotate(45deg) translate(5px, 6px)' : 'none'};
+  }
+  
+  span:nth-child(2) {
+    opacity: ${props => props.$open ? 0 : 1};
+  }
+  
+  span:last-child {
+    transform: ${props => props.$open ? 'rotate(-45deg) translate(5px, -6px)' : 'none'};
+  }
+  
   @media (max-width: 768px) {
     display: flex;
-  }
-`;
-
-const ThemeToggleButton = styled.button`
-  background: none;
-  border: none;
-  color: ${props => props.theme.primary};
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  transition: all 0.3s ease;
-  padding: 0;
-  
-  &:hover {
-    transform: scale(1.1);
-    background-color: ${props => props.theme.primary};
-    color: ${props => props.theme.navbar?.foreground || props.theme.foreground};
-  }
-  
-  &:focus {
-    outline: none;
   }
 `;
 

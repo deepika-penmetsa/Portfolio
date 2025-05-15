@@ -86,7 +86,6 @@ const MainContent = styled.main`
   
   section {
     min-height: 100vh;
-    padding: 0px 20px 60px 20px;
     scroll-margin-top: 60px;
   }
 `;

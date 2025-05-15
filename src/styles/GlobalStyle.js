@@ -72,7 +72,7 @@ const GlobalStyle = createGlobalStyle`
     height: auto;
   }
 
-  button, 
+  button:not(.no-style), 
   input[type="button"], 
   input[type="submit"] {
     cursor: pointer;
@@ -80,7 +80,7 @@ const GlobalStyle = createGlobalStyle`
     color: white;
     border: none;
     padding: 0.5rem 1rem;
-    border-radius: 4px;
+    border-radius: none;
     font-family: ${props => props.theme.font.family};
     font-size: 1rem;
     transition: background-color 0.2s;
@@ -108,7 +108,7 @@ const GlobalStyle = createGlobalStyle`
   ::-webkit-scrollbar-thumb {
     background: ${props => props.theme.border};
     border-radius: 5px;
-    border: 2px solid ${props => props.theme.background};
+    border: 2px solid transparent;
   }
 
   ::-webkit-scrollbar-thumb:hover {

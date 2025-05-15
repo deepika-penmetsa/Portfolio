@@ -90,10 +90,6 @@ const HomeContainer = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background: ${props => props.theme.name === 'dark' 
-      ? 'radial-gradient(circle at 10% 20%, rgba(0, 122, 204, 0.1) 0%, rgba(0, 0, 0, 0) 80%)'
-      : 'radial-gradient(circle at 10% 20%, rgba(3, 102, 214, 0.1) 0%, rgba(255, 255, 255, 0) 80%)'
-    };
     z-index: -1;
   }
 `;
@@ -198,13 +194,13 @@ const SkillsContainer = styled.div`
 
 const SkillBadge = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  background-color: ${props => props.theme.name === 'dark'
-    ? 'rgba(0, 170, 0, 0.1)'
-    : 'rgba(3, 102, 214, 0.08)'
-  };
+  width: 80px;
+  
+  
   color: ${props => props.theme.syntax.variable};
   border-radius: 6px;
   font-size: 0.9rem;
@@ -222,7 +218,7 @@ const SkillBadge = styled.div`
 
 const SkillIcon = styled.div`
   color: ${props => props.theme.primary};
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   display: flex;
   align-items: center;
 `;

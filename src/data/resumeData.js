@@ -1,6 +1,7 @@
 import jobmatrixImage from '../data/jobmatrix.png';
 import elevateImage from '../data/elevate.png';
 import iplImage from '../data/ipl.png';
+import portfolioImage from '../data/profile.png';
 
 
 
@@ -57,42 +58,91 @@ const resumeData = {
   ],
   projects: [
     {
+      name: "Portfolio Website",
+      date: "May 2025",
+      links: {
+        github: "https://github.com/deepika-penmetsa/Portfolio"
+      },
+      image: portfolioImage,
+      description: "A modern, interactive personal portfolio website featuring a terminal-inspired interface with a responsive design, dark/light mode toggle, and project showcase to highlight my skills and development experience.",
+      detailedDescription: [
+        "Developed a fully responsive portfolio with React.js and styled-components using a unique terminal-inspired interface",
+        "Implemented a custom projects carousel with interactive navigation and responsive layout for optimal viewing across devices",
+        "Created a dark/light theme system with seamless transitions and consistent visual hierarchy",
+        "Built an interactive terminal emulation with custom commands for an engaging user experience"
+      ],
+      technologies: ["React", "JavaScript", "Styled Components", "Framer Motion", "Responsive Design", "Terminal UI"],
+      highlights: [
+        "Terminal-inspired interface with command execution",
+        "Fully responsive design with mobile-first approach",
+        "Custom carousel with interactive navigation",
+        "Seamless dark/light mode theming"
+      ]
+    },
+    {
       name: "Job Matrix",
+      date: "April 2025",
       links: {
         live: "https://jobmatrixapp.netlify.app",
         github: "https://github.com/deepika-penmetsa/JobMatrixFrontend"
       },
       image: jobmatrixImage,
-      description: [
+      description: "A comprehensive job portal application that connects employers and job seekers through an intuitive interface with secure authentication, powerful search capabilities, and real-time job application tracking.",
+      detailedDescription: [
         "Built the Django backend for a job portal application with REST API endpoints for job postings and applications",
         "Implemented authentication, authorization, and data models for job seekers and employers",
         "Designed database schema and optimized queries for efficient job search functionality",
         "Integrated the Django backend with a React frontend through RESTful API interactions"
+      ],
+      technologies: ["React", "Redux" , "MySql", "JWT Auth", "Python", "Django", "REST API", "Material UI"],
+      highlights: [
+        "30 high-performance Web APIs using Django REST Framework",
+        "Integration with AWS services for file storage",
+        "Role-based access control for employers and job seekers",
+        "Dockerization for streamlined deployment"
       ]
     },
     {
       name: "Elevate",
+      date: "March 2025",
       links: {
         github: "https://github.com/deepika-penmetsa/StudentClubManagment"
       },
       image: elevateImage,
-      description: [
+      description: "A dynamic college club management platform that streamlines club discovery, membership, and event participation for students while providing organizers with powerful tools for activity management and member communication.",
+      detailedDescription: [
         "Developed the Frontend of a College Club Management Platform using React.js, enabling students to explore, join, and manage clubs.",
         "Designed and implemented a responsive and interactive UI for club details, announcements, events, and discussions.",
         "Integrated dynamic navigation, real-time updates, and seamless API interactions for an enhanced user experience."
+      ],
+      technologies: ["React", "JavaScript", "MySql", "JWT", "REST API" , "JAVA", "Springboot" , "Redux", "Material UI"],
+      highlights: [
+        "Interactive club discovery and management interface",
+        "Real-time notifications for club events and announcements",
+        "Responsive design for all device sizes",
+        "Optimized state management with Redux"
       ]
     },
     {
       name: "IPL Dashboard",
+      date: "May 2024",
       links: {
         live: "https://imaginative-pithivier-21ee16.netlify.app",
         github: "https://github.com/deepika-penmetsa/IPL_Dashboard"
       },
       image: iplImage,
-      description: [
+      description: "An interactive cricket statistics platform featuring real-time match data, comprehensive team profiles, and player performance metrics for the Indian Premier League, designed with responsive visualization tools for an engaging fan experience.",
+      detailedDescription: [
         "Designed and implemented an IPL Dashboard using React JS for the 2020 season, serving real-time data for over 30+ matches, 8 teams, and their complete player rosters.",
         "Utilized React JS for a dynamic and user-friendly interface, showcasing team details and statistics.",
         "Ensured 100 percent responsive design with interactive components."
+      ],
+      technologies: ["React", "JavaScript", "API Integration", "CSS", "Redux"],
+      highlights: [
+        "Data visualization for team and player statistics",
+        "Real-time match updates and scorecards",
+        "Interactive team comparison features",
+        "Optimized performance for mobile devices"
       ]
     }
   ],
