@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { FiSun, FiMoon } from 'react-icons/fi';
-import { FaGithub, FaLinkedin, FaEnvelope, FaPencilAlt } from 'react-icons/fa';
-import { LuMoonStar, LuSun } from "react-icons/lu";
+import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { FaMoon , FaSun} from "react-icons/fa";
-import { BiSun, BiMoon } from 'react-icons/bi';
 
 const Navbar = ({ activeSection, setActiveSection, currentTheme, toggleTheme }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -96,6 +93,12 @@ const Navbar = ({ activeSection, setActiveSection, currentTheme, toggleTheme }) 
               onClick={() => handleNavClick('about')}
             >
               About
+            </NavItem>
+            <NavItem 
+              $isActive={activeSection === 'experience'} 
+              onClick={() => handleNavClick('experience')}
+            >
+              Experience
             </NavItem>
             <NavItem 
               $isActive={activeSection === 'projects'} 

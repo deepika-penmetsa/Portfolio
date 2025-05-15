@@ -6,6 +6,7 @@ import resumeData from './data/resumeData';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import About from './components/About';
+import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 
@@ -45,7 +46,7 @@ function App() {
   return (
     <ThemeProvider theme={currentTheme === 'dark' ? vscodeTheme : vscodeLightTheme}>
       <GlobalStyle />
-      <AppContainer>
+      <AppContainer data-theme={currentTheme}>
         <Navbar 
           activeSection={activeSection} 
           setActiveSection={setActiveSection}
@@ -58,6 +59,9 @@ function App() {
           </section>
           <section id="about">
             <About resumeData={resumeData} />
+          </section>
+          <section id="experience">
+            <Experience resumeData={resumeData} />
           </section>
           <section id="projects">
             <Projects resumeData={resumeData} />
