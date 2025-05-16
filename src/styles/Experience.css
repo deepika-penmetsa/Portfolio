@@ -452,6 +452,7 @@
 
 [data-theme='light'] .bullet-content {
   color: var(--foreground, #24292E);
+  font-size: 1.1rem;
 }
 
 /* Fixing any green shade that might appear in light mode */

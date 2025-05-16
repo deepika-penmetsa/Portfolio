@@ -10,7 +10,7 @@ const resumeData = {
     name: "Deepika Penmetsa",
     location: "Mount Pleasant, Michigan 48858",
     phone: "989-621-7701",
-    email: "deepika.penmetsa321@gmail.com",
+    email: "deepikapenmetsa05@gmail.com",
     linkedin: "linkedin.com/in/deepika",
     github: "github.com/deepika"
   },
@@ -288,7 +288,7 @@ I'm a Full Stack Developer with a passion for building user-friendly web applica
     "contact.json": {
       "name": "Deepika Penmetsa",
       "location": "Mount Pleasant, Michigan 48858",
-      "email": "deepika.penmetsa321@gmail.com",
+      "email": "deepikapenmetsa05@gmail.com",
       "phone": "989-621-7701",
       "profiles": [
         {
@@ -301,7 +301,7 @@ I'm a Full Stack Developer with a passion for building user-friendly web applica
         },
         {
           "network": "Email",
-          "url": "deepika.penmetsa321@gmail.com"
+          "url": "deepikapenmetsa05@gmail.com"
         },
         {
           "network": "Leetcode",
@@ -315,7 +315,7 @@ I'm a Full Stack Developer with a passion for building user-friendly web applica
     "help": "Available commands: ls, cat, clear, help, cd, pwd, whoami, sudo",
     "ls": ["welcome.md", "about.md", "projects.json", "contact.json"],
     "whoami": "visitor@deepika-portfolio:~$",
-    "sudo hire-me": "✨ Great choice! Let's talk about how I can contribute to your team. Send me an email at deepika.penmetsa321@gmail.com ✨",
+    "sudo hire-me": "✨ Great choice! Let's talk about how I can contribute to your team. Send me an email at deepikapenmetsa05@gmail.com ✨",
     "vim": "I see you're a developer of culture as well... but how do you exit Vim? 😄"
   }
 };

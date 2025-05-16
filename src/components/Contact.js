@@ -11,7 +11,7 @@ import { FaLinkedin, FaGithub, FaFileAlt } from 'react-icons/fa';
 import { SiLeetcode } from "react-icons/si";
 
 const Contact = ({ resumeData }) => {
-  const resumePath = '/assets/Deepika_Penmetsa_Resume.pdf';
+  const resumePath = '/assets/Deepika_Resume.pdf';
 
   return (
     <ContactContainer id="contact">

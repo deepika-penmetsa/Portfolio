@@ -117,7 +117,7 @@ const Navbar = ({ activeSection, setActiveSection, currentTheme, toggleTheme }) 
         
         <RightSection>
           <SocialLinks>
-            <SocialLink href="mailto:deepika.penmetsa321@gmail.com" aria-label="Email">
+            <SocialLink href="mailto:deepikapenmetsa05@gmail.com" aria-label="Email">
               <Icon>
                 <FaEnvelope size={20} />
               </Icon>

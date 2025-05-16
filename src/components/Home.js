@@ -68,6 +68,7 @@ const Home = ({ resumeData }) => {
 
 const HomeContainer = styled.div`
   min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -91,13 +92,23 @@ const HomeContainer = styled.div`
     bottom: 0;
     z-index: -1;
   }
+  
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 const HeroContent = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 60px;
+  max-width: 1200px;
+  width: 100%;
   
   @media (max-width: 992px) {
     flex-direction: column;
@@ -108,6 +119,7 @@ const HeroContent = styled.div`
 
 const HeroText = styled.div`
   flex: 1;
+  max-width: 600px;
 `;
 
 const Greeting = styled.p`
@@ -167,7 +179,7 @@ const SkillBadge = styled.div`
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  width: 100px;
+  width: 90px;
   
   
   color: ${props => props.theme.syntax.variable};
