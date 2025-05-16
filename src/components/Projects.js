@@ -153,14 +153,14 @@ const Projects = ({ resumeData }) => {
                 onClick={prevSlide} 
                 aria-label="Previous project"
               >
-                <FaChevronLeft />
+                <FaChevronLeft color="currentColor" />
               </NavButton>
               
               <NavButton 
                 onClick={nextSlide} 
                 aria-label="Next project"
               >
-                <FaChevronRight />
+                <FaChevronRight color="currentColor" />
               </NavButton>
             </NavButtonsContainer>
           </ProjectsSliderWrapper>
@@ -199,7 +199,7 @@ const SectionHeader = styled.div`
     width: 100px;
     height: 4px;
     background: ${props => props.theme.name === 'dark'
-      ? 'linear-gradient(to right, #00FF00, rgba(0, 255, 0, 0.1))'
+      ? 'linear-gradient(to right, #00e3aa, rgba(0, 227, 170, 0.1))'
       : 'linear-gradient(to right, #0366D6, rgba(3, 102, 214, 0.1))'};
     border-radius: 3px;
   }
@@ -228,13 +228,13 @@ const SectionTitle = styled.h2`
   font-size: 2.8rem;
   font-weight: 700;
   color: ${props => props.theme.name === 'dark' 
-    ? '#00FF00' 
+    ? props.theme.accent 
     : props.theme.syntax?.function || '#0366D6'};
   margin-bottom: 0.8rem;
   position: relative;
   display: inline-block;
   text-shadow: ${props => props.theme.name === 'dark' 
-    ? '0 0 10px rgba(0, 255, 0, 0.3)' 
+    ? '0 0 10px rgba(0, 227, 170, 0.3)' 
     : '0 0 10px rgba(3, 102, 214, 0.3)'};
   
   @media (max-width: 768px) {
@@ -314,14 +314,14 @@ const ProjectsSliderWrapper = styled.div`
           width: 10px;
           height: 10px;
           font-size: 0;
-          background-color: ${props => props.theme.name === 'dark' ? 'rgba(0, 255, 0, 0.3)' : 'rgba(3, 102, 214, 0.3)'};
+          background-color: ${props => props.theme.name === 'dark' ? 'rgba(0, 227, 170, 0.3)' : 'rgba(3, 102, 214, 0.3)'};
           border-radius: 50%;
           transition: all 0.3s ease;
         }
       }
       
       &.slick-active button:before {
-        background-color: ${props => props.theme.name === 'dark' ? '#00FF00' : '#0366D6'};
+        background-color: ${props => props.theme.name === 'dark' ? props.theme.accent : '#0366D6'};
         transform: scale(1.2);
       }
     }
@@ -360,82 +360,67 @@ const NavButtonsContainer = styled.div`
   left: 0;
   right: 0;
   transform: translateY(-50%);
-  z-index: 10;
+  z-index: 20;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px;
+  padding: 0 15px;
   pointer-events: none;
-  width: 108%;
-  left: -4%;
-  
-  @media (max-width: 1200px) {
-    width: 106%;
-    left: -3%;
-  }
+  width: 100%;
   
   @media (max-width: 768px) {
-    width: 104%;
-    left: -2%;
+    padding: 0 10px;
   }
   
   @media (max-width: 480px) {
-    width: 102%;
-    left: -1%;
+    padding: 0 5px;
   }
 `;
 
 const NavButton = styled.button`
-  width: 45px;
-  height: 45px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  border: 2px solid ${props => props.theme.name === 'dark' 
-    ? 'rgba(0, 255, 0, 0.3)' 
-    : 'rgba(3, 102, 214, 0.3)'};
-  background: ${props => props.theme.name === 'dark' 
-    ? 'rgba(0, 50, 0, 0.7)' 
-    : 'rgba(255, 255, 255, 0.8)'};
-  color: ${props => props.theme.name === 'dark' 
-    ? '#00FF00' 
-    : '#4169E1'};
+  border: none;
+  background: transparent !important;
+  color: ${props => props.theme.name === 'dark' ? props.theme.accent : '#000000'};
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
   pointer-events: auto;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
   
   &:hover {
-    transform: scale(1.1);
-    border-color: ${props => props.theme.name === 'dark' 
-      ? 'rgba(0, 255, 0, 0.6)' 
-      : 'rgba(3, 102, 214, 0.6)'};
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+    transform: scale(1.15);
+    background: transparent !important;
   }
   
   svg {
-    width: 22px;
-    height: 22px;
+    width: 35px;
+    height: 35px;
+    fill: ${props => props.theme.name === 'dark' ? props.theme.accent : '#0366D6'};
+    color: inherit;
+    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.3));
   }
   
   @media (max-width: 768px) {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     
     svg {
-      width: 20px;
-      height: 20px;
+      width: 30px;
+      height: 30px;
     }
   }
   
   @media (max-width: 480px) {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     
     svg {
-      width: 18px;
-      height: 18px;
+      width: 26px;
+      height: 26px;
     }
   }
 `;
@@ -516,7 +501,7 @@ const ProjectTitle = styled.h3`
   font-size: 1.8rem;
   font-weight: 600;
   color: ${props => props.theme.name === 'dark' 
-    ? '#00FF00' 
+    ? props.theme.accent 
     : props.theme.syntax?.function || '#0366D6'};
   margin: 0;
   
@@ -532,7 +517,7 @@ const ProjectTitle = styled.h3`
 const ProjectDate = styled.span`
   font-size: 1rem;
   font-family: 'SF Mono', 'Fira Code', monospace;
-  color: ${props => props.theme.name === 'dark' ? 'rgba(0, 255, 0, 0.7)' : 'rgba(3, 102, 214, 0.7)'};
+  color: ${props => props.theme.name === 'dark' ? 'rgba(0, 227, 170, 0.7)' : 'rgba(3, 102, 214, 0.7)'};
   margin-left: 12px;
   font-weight: 500;
   font-size: 1.1rem;
@@ -587,7 +572,7 @@ const CommandSection = styled.div``;
 
 const CommandPrompt = styled.div`
   font-family: 'SF Mono', 'Fira Code', monospace;
-  color: ${props => props.theme.name === 'dark' ? '#00FF00' : '#0366D6'};
+  color: ${props => props.theme.accent};
   font-size: 1rem;
   margin-bottom: 10px;
   
@@ -614,7 +599,7 @@ const FeatureItem = styled.div`
 `;
 
 const FeatureIcon = styled.span`
-  color: ${props => props.theme.name === 'dark' ? '#00FF00' : '#0366D6'};
+  color: ${props => props.theme.accent};
   font-size: 1.5rem;
   line-height: 1;
   margin-right: 10px;
@@ -650,20 +635,20 @@ const TechBadge = styled.span`
   align-items: center;
   padding: 6px 16px;
   background-color: ${props => props.theme.name === 'dark' 
-    ? 'rgba(0, 100, 0, 0.7)' 
+    ? 'rgba(0, 227, 170, 0.15)' 
     : 'rgba(3, 102, 214, 0.1)'};
-  color: ${props => props.theme.name === 'dark' ? '#FFFFFF' : '#0366D6'};
+  color: ${props => props.theme.name === 'dark' ? props.theme.accent : '#0366D6'};
   border-radius: 20px;
   font-size: 0.9rem;
   font-weight: 500;
   border: 1px solid ${props => props.theme.name === 'dark' 
-    ? 'rgba(0, 170, 0, 0.3)' 
+    ? 'rgba(0, 227, 170, 0.3)' 
     : 'rgba(3, 102, 214, 0.3)'};
   transition: all 0.3s ease;
   
   &:hover {
     background-color: ${props => props.theme.name === 'dark' 
-      ? 'rgba(0, 170, 0, 0.5)' 
+      ? 'rgba(0, 227, 170, 0.25)' 
       : 'rgba(3, 102, 214, 0.2)'};
     transform: translateY(-2px);
   }
@@ -694,7 +679,7 @@ const LinkButton = styled.a`
   transition: all 0.3s ease;
   text-decoration: none;
   background-color: ${props => props.$primary 
-    ? (props.theme.name === 'dark' ? 'rgba(0, 170, 0, 0.8)' : '#0366D6') 
+    ? (props.theme.name === 'dark' ? props.theme.accent : '#0366D6') 
     : (props.theme.name === 'dark' ? 'rgba(0, 0, 0, 0.5)' : 'rgba(246, 248, 250, 0.8)')};
   color: ${props => props.$primary ? '#FFFFFF' : props.theme.foreground};
   border: 1px solid ${props => props.$primary 
@@ -705,7 +690,7 @@ const LinkButton = styled.a`
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     background-color: ${props => props.$primary 
-      ? (props.theme.name === 'dark' ? 'rgba(0, 200, 0, 0.9)' : '#0366D6') 
+      ? (props.theme.name === 'dark' ? 'rgba(0, 227, 170, 0.8)' : '#0366D6') 
       : (props.theme.name === 'dark' ? 'rgba(30, 30, 30, 0.7)' : 'rgba(246, 248, 250, 0.9)')};
   }
   

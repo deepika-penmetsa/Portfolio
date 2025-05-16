@@ -4,6 +4,7 @@
   background-color: var(--bg-color, #121212);
   min-height: 100vh;
   color: var(--text-color, #e0e0e0);
+  --accent-color-rgb: 0, 227, 170; /* Add explicit RGB values for dark mode */
 }
 
 .experience-content {
@@ -46,7 +47,7 @@
   font-weight: 500;
 }
 
-/* New Experience Tab Styles */
+/* Experience Container */
 .experience-container {
   max-width: 1400px;
   margin: 0 auto;
@@ -56,13 +57,27 @@
   position: relative;
 }
 
-/* Company tabs at the top */
-.company-tabs {
-  display: flex;
-  justify-content: flex-end;
-  gap: 15px;
+/* New Experience Navigation Styles */
+.experience-nav-wrapper {
+  overflow-x: auto;
   margin-bottom: 30px;
-  flex-wrap: wrap;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  position: relative;
+  padding-bottom: 2px; /* Space for scrollbar */
+}
+
+.experience-nav-wrapper::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.experience-nav {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  gap: 15px;
+  min-width: max-content;
+  padding-bottom: 8px; /* Space for indicator */
 }
 
 .company-tab {
@@ -77,6 +92,8 @@
   display: flex;
   flex-direction: column;
   font-family: 'SF Mono', 'Fira Code', monospace;
+  color: inherit;
+  position: relative;
 }
 
 .company-tab.active {
@@ -89,6 +106,14 @@
 .company-tab:hover:not(.active) {
   background-color: rgba(50, 50, 50, 0.8);
   border-color: rgba(100, 100, 100, 0.4);
+}
+
+.company-tab.active:hover {
+  background-color: var(--accent-color, #00e3aa);
+  color: #000;
+  border: none;
+  box-shadow: 0 0 15px rgba(0, 227, 170, 0.3);
+  transform: scale(1.01);
 }
 
 .company-name {
@@ -107,120 +132,13 @@
 }
 
 .work-container {
-  display: flex;
-  align-items: flex-start;
   position: relative;
 }
 
-/* Desktop timeline styles */
-.desktop-timeline {
-  width: 300px;
-  min-width: 300px;
-  margin-right: 60px;
-  position: relative;
-  display: none; /* Hide the left side timeline */
-}
-
-/* Vertical line */
-.desktop-timeline::after {
-  content: '';
-  position: absolute;
-  top: 15px;
-  bottom: 15px;
-  left: 12px;
-  width: 2px;
-  background-color: #333;
-  z-index: 1;
-}
-
-/* Mobile timeline styles */
-.mobile-timeline {
-  display: none;
-}
-
-.timeline-item {
-  position: relative;
-  padding-left: 40px;
-  margin-bottom: 30px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.timeline-item.active {
-  transform: none;
-}
-
-.timeline-item:last-child {
-  margin-bottom: 0;
-}
-
-/* Circle indicators */
-.timeline-point {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 26px;
-  height: 26px;
-  margin-top: -13px;
-  background-color: transparent;
-  border: 2px solid #444;
-  border-radius: 50%;
-  z-index: 2;
-}
-
-.timeline-point.active {
-  background-color: var(--accent-color, #00e3aa);
-  border-color: var(--accent-color, #00e3aa);
-  box-shadow: 0 0 10px rgba(0, 227, 170, 0.5);
-}
-
-/* Company cards */
-.timeline-company {
-  font-family: 'SF Mono', 'Fira Code', monospace;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-color, #e0e0e0);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 20px;
-  background-color: rgba(40, 40, 40, 0.5);
-  border-radius: 8px;
-  border: 1px solid rgba(100, 100, 100, 0.2);
-  transition: all 0.3s ease;
-  width: 100%;
-  height: 60px;
-  box-sizing: border-box;
-}
-
-.timeline-company.active {
-  color: #000;
-  background-color: var(--accent-color, #00e3aa);
-  border: none;
-  box-shadow: 0 0 15px rgba(0, 227, 170, 0.3);
-}
-
-.timeline-company:hover:not(.active) {
-  background-color: rgba(50, 50, 50, 0.8);
-  border-color: rgba(100, 100, 100, 0.4);
-}
-
-.timeline-date {
-  font-size: 0.9rem;
-  font-family: 'SF Mono', 'Fira Code', monospace;
-  color: rgba(180, 180, 180, 0.9);
-  background: none;
-  padding: 3px 0;
-}
-
-.timeline-company.active .timeline-date {
-  color: rgba(0, 0, 0, 0.7);
-}
-
+/* Content area */
 .content-column {
   flex: 1;
   position: relative;
-  padding-left: 0;
 }
 
 .content-panel {
@@ -229,25 +147,53 @@
   border-radius: 12px;
 }
 
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.job-title-container {
+  flex: 1;
+  min-width: 200px;
+}
+
+.job-date-container {
+  white-space: nowrap;
+}
+
 .job-title {
   font-size: 1.5rem;
   font-weight: 600;
   color: var(--text-color, #e0e0e0);
-  margin-bottom: 10px;
+  margin-bottom: 0;
   line-height: 1.3;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
 }
 
 .company-span {
   color: var(--accent-color, #00e3aa);
+  font-size: 1.2rem;
+  padding-left: 10px;
+  white-space: nowrap;
 }
 
 .job-date {
   font-size: 0.9rem;
   font-family: 'SF Mono', 'Fira Code', monospace;
-  color: var(--text-secondary, #8892b0);
-  margin-bottom: 25px;
+  color: var(--accent-color, #00e3aa);
+  margin-bottom: 0;
+  padding: 6px 12px;
+  border-radius: 5px;
 }
 
+/* Bullet list styles */
 .bullet-list {
   list-style: none;
   padding: 0;
@@ -277,9 +223,132 @@
   color: var(--text-color, #e0e0e0);
 }
 
+/* Vertical Timeline for Mobile */
+.vertical-timeline {
+  width: 100%;
+}
+
+.vertical-timeline .timeline-item {
+  display: flex;
+  position: relative;
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+}
+
+.vertical-timeline .timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.vertical-timeline .timeline-item:last-child .timeline-connector:after {
+  display: none;
+}
+
+.timeline-connector {
+  position: relative;
+  min-width: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.timeline-connector:after {
+  content: '';
+  position: absolute;
+  top: 30px;
+  bottom: -30px;
+  left: 50%;
+  width: 2px;
+  background-color: rgba(100, 100, 100, 0.3);
+  transform: translateX(-50%);
+}
+
+.timeline-point {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  margin-top: 8px;
+  background-color: transparent;
+  border: 2px solid rgba(100, 100, 100, 0.5);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.timeline-point.active {
+  background-color: var(--accent-color, #00e3aa);
+  border-color: var(--accent-color, #00e3aa);
+  box-shadow: 0 0 10px rgba(0, 227, 170, 0.5);
+}
+
+.timeline-content {
+  flex: 1;
+  background-color: rgba(40, 40, 40, 0.3);
+  padding: 16px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.timeline-content.active {
+  background-color: rgba(40, 40, 40, 0.5);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.expand-icon {
+  font-size: 18px;
+  color: var(--accent-color, #00e3aa);
+  margin-left: 10px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.timeline-item.expanded .expand-icon {
+  color: var(--accent-color, #00e3aa);
+}
+
+.timeline-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 5px;
+}
+
+.timeline-company {
+  color: var(--accent-color, #00e3aa);
+  font-size: 1rem;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.timeline-date {
+  font-size: 0.85rem;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  color: var(--text-secondary, #8892b0);
+  display: block;
+  margin-bottom: 5px;
+}
+
+.timeline-details {
+  margin-top: 15px;
+  overflow: hidden;
+  border-top: none;
+  padding-top: 15px;
+}
+
 /* Light mode overrides */
 [data-theme='light'] .fade-section#experience {
   background-color: var(--bg-color, #FFFFFF);
+  --accent-color-rgb: 3, 102, 214; /* Add explicit RGB values for light mode */
 }
 
 [data-theme='light'] .section-title {
@@ -314,7 +383,8 @@
   border-color: rgba(150, 150, 150, 0.3);
 }
 
-[data-theme='light'] .desktop-timeline::after {
+
+[data-theme='light'] .timeline-connector:after {
   background-color: #ddd;
 }
 
@@ -328,29 +398,36 @@
   box-shadow: 0 0 10px rgba(3, 102, 214, 0.5);
 }
 
-[data-theme='light'] .timeline-company {
-  color: var(--foreground, #24292E);
+[data-theme='light'] .timeline-content {
   background-color: rgba(245, 245, 245, 0.7);
-  border-color: rgba(200, 200, 200, 0.4);
+  color: var(--foreground, #24292E);
 }
 
-[data-theme='light'] .timeline-company.active {
-  color: #fff;
-  background-color: var(--accent-color, #0366D6);
-  border: none;
+[data-theme='light'] .timeline-content.active {
+  background-color: rgba(235, 235, 235, 0.9);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
-[data-theme='light'] .timeline-company:hover:not(.active) {
-  background-color: rgba(235, 235, 235, 1);
-  border-color: rgba(150, 150, 150, 0.3);
+[data-theme='light'] .timeline-company {
+  color: var(--accent-color, #0366D6);
 }
 
 [data-theme='light'] .timeline-date {
   color: rgba(50, 50, 50, 0.7);
 }
 
-[data-theme='light'] .timeline-company.active .timeline-date {
-  color: rgba(255, 255, 255, 0.8);
+[data-theme='light'] .timeline-details {
+  border-top: none;
+}
+
+[data-theme='light'] .expand-icon {
+  background-color: transparent;
+  color: var(--accent-color, #0366D6);
+}
+
+[data-theme='light'] .timeline-item.expanded .expand-icon {
+  background-color: transparent;
+  color: var(--accent-color, #0366D6);
 }
 
 [data-theme='light'] .content-panel {
@@ -366,7 +443,7 @@
 }
 
 [data-theme='light'] .job-date {
-  color: var(--syntax-comment, #6A737D);
+  color: var(--accent-color, #0366D6);
 }
 
 [data-theme='light'] .bullet-arrow {
@@ -377,12 +454,22 @@
   color: var(--foreground, #24292E);
 }
 
+/* Fixing any green shade that might appear in light mode */
+[data-theme='light'] .timeline-content:after {
+  background: radial-gradient(circle at center bottom, 
+    rgba(3, 102, 214, 0.05) 0%, 
+    transparent 70%);
+}
+
 /* Responsive Styles */
 @media (max-width: 1024px) {
-  .desktop-timeline {
-    width: 250px;
-    min-width: 250px;
-    margin-right: 40px;
+  .experience-nav {
+    justify-content: flex-start;
+  }
+  
+  .company-tab {
+    min-width: 140px;
+    padding: 10px 20px;
   }
 }
 
@@ -403,8 +490,8 @@
     padding: 20px 15px;
   }
   
-  .company-tabs {
-    justify-content: center;
+  .experience-nav {
+    justify-content: flex-start;
     gap: 10px;
   }
   
@@ -412,41 +499,45 @@
     padding: 10px 15px;
     min-width: 120px;
   }
-  
-  .work-container {
-    flex-direction: column;
-    position: relative;
-  }
-  
-  /* Hide desktop timeline on mobile */
-  .desktop-timeline {
-    display: none;
+
+  .timeline-title {
+    font-size: 1rem;
   }
   
-  /* Show mobile timeline on mobile */
-  .mobile-timeline {
-    display: none; /* Hide on mobile as well, we're using tabs */
+  .timeline-company {
+    font-size: 0.95rem;
   }
-
-  .content-column {
-    padding-left: 0;
-    padding-top: 20px;
+  
+  .timeline-content {
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
-
-  .content-panel {
-    padding: 25px;
+  
+  .timeline-content:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: radial-gradient(circle at center bottom, 
+      rgba(0, 227, 170, 0.05) 0%, 
+      transparent 70%);
   }
-
-  .job-title {
-    font-size: 1.3rem;
+  
+  .timeline-content.active:after {
+    opacity: 1;
+  }
+  
+  .timeline-item.expanded .timeline-content {
+    margin-bottom: 10px;
   }
 }
 
 @media (max-width: 576px) {
-  .job-title {
-    font-size: 1.1rem;
-  }
-  
   .experience-container {
     padding: 15px 10px;
   }
@@ -462,6 +553,45 @@
   
   .company-date {
     font-size: 0.75rem;
+  }
+  
+  .timeline-connector {
+    min-width: 30px;
+  }
+  
+  .timeline-point {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .timeline-content {
+    padding: 12px 16px;
+  }
+  
+  .bullet-item {
+    font-size: 0.9rem;
+  }
+  
+  .expand-icon {
+    font-size: 16px;
+  }
+  
+  .job-header {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .job-title {
+    display: block;
+  }
+  
+  .company-span {
+    display: block;
+    margin-top: 4px;
+  }
+
+  .job-date {
+    margin-top: 5px;
   }
 }
 
@@ -481,17 +611,78 @@
   .experience-container {
     padding: 10px 5px;
   }
-
-  .content-panel {
-    padding: 20px 15px;
-  }
   
   .bullet-item {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     margin-bottom: 12px;
   }
   
   .job-date {
     margin-bottom: 20px;
   }
+  
+  .timeline-content {
+    padding: 12px 14px;
+  }
+  
+  .timeline-details {
+    margin-top: 12px;
+    padding-top: 12px;
+  }
+}
+
+.skills-container {
+  margin-top: 18px;
+  padding-top: 5px;
+}
+
+.skills-title {
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+  color: var(--text-color);
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.skill-tag {
+  display: inline-block;
+  font-size: 0.85rem;
+  padding: 6px 15px;
+  border-radius: 25px;
+  background-color: rgba(var(--accent-color-rgb), 0.08);
+  color: var(--accent-color);
+  transition: all 0.2s ease;
+  font-weight: 500;
+  border: 1px solid rgba(var(--accent-color-rgb), 0.2);
+  margin: 2px;
+}
+
+.skill-tag:hover {
+  background-color: rgba(var(--accent-color-rgb), 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(var(--accent-color-rgb), 0.15);
+}
+
+/* Light mode override for skills */
+[data-theme='light'] .skill-tag {
+  background-color: rgba(3, 102, 214, 0.08);
+  color: #0366D6;
+  border: 1px solid rgba(3, 102, 214, 0.2);
+}
+
+[data-theme='light'] .skill-tag:hover {
+  background-color: rgba(3, 102, 214, 0.15);
+  box-shadow: 0 2px 5px rgba(3, 102, 214, 0.1);
+}
+
+[data-theme='light'] .skills-title {
+  color: var(--foreground, #24292E);
+  opacity: 0.85;
 } 

@@ -19,6 +19,14 @@ const GlobalStyle = createGlobalStyle`
     color: ${props => props.theme.foreground};
     overflow-x: hidden;
     transition: background-color 0.3s, color 0.3s;
+    
+    /* Theme CSS variables */
+    --bg-color: ${props => props.theme.background};
+    --text-color: ${props => props.theme.foreground};
+    --accent-color: ${props => props.theme.accent};
+    --accent-color-rgb: ${props => props.theme.name === 'dark' ? '0, 227, 170' : '3, 102, 214'};
+    --heading-color: ${props => props.theme.heading};
+    --border-color: ${props => props.theme.border};
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -76,7 +84,6 @@ const GlobalStyle = createGlobalStyle`
   input[type="button"], 
   input[type="submit"] {
     cursor: pointer;
-    background-color: ${props => props.theme.primary};
     color: white;
     border: none;
     padding: 0.5rem 1rem;
@@ -91,8 +98,6 @@ const GlobalStyle = createGlobalStyle`
 
     &:focus {
       outline: none;
-      box-shadow: 0 0 0 2px ${props => props.theme.background}, 
-                  0 0 0 4px ${props => props.theme.primary};
     }
   }
 

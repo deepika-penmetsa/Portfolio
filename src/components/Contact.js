@@ -271,6 +271,7 @@ const ContactInfoValue = styled.div`
     text-decoration: none;
     
     &:hover {
+      color: ${props => props.theme.primary};
       text-decoration: underline;
     }
   }
@@ -343,7 +344,6 @@ const ResumeLink = styled.a`
   border: 1px solid ${props => `${props.theme.primary}30`};
   
   &:hover {
-    background-color: ${props => props.theme.primary};
     color: ${props => props.theme.background};
   }
 

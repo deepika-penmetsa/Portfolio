@@ -28,9 +28,12 @@ const resumeData = {
       location: "Mount Pleasant, MI",
       period: "Jan 2024 - Dec 2024",
       bullets: [
-        "Assisted Professor Liu Ming's research projects and managed administrative tasks, including 5 hours of weekly office hours to assist students and streamline academic operations",
-        "Delivered lectures to graduate classes on SQL databases and Tableau, enhancing technical proficiency for over 160 students across four sessions."
-      ]
+        "Utilized Python and SQL to analyze large datasets, supporting research projects with data-driven insights under Dr. Liu Ming's guidance",
+        "Designed and optimized SQL databases for efficient data storage and retrieval, improving query performance for research workflows",
+        "Developed interactive Tableau dashboards to visualize research findings, enhancing data accessibility for academic stakeholders",
+        "Automated data processing tasks using Python scripts, saving 20 hours per week and boosting research efficiency"
+      ],
+      skills: ["Python", "SQL", "Data Analysis", "Tableau", "Database Optimization"]
     },
     {
       title: "React Full Stack Developer",
@@ -42,18 +45,20 @@ const resumeData = {
         "Streamlined user workflows and improved UI performance through modular architecture and optimized event handling.",
         "Built backend APIs using Django to support frontend data needs and managed data flow between services",
         "Worked closely with backend teams to integrate APIs and ensure real-time data rendering for camera ecosystem dashboards."
-      ]
+      ],
+      skills: ["React", "JavaScript", "Django", "APIs", "Component Design", "UI Performance"]
     },
     {
       title: "Frontend Engineer",
       company: "Ignitarium",
       location: "Bengaluru, Karnataka",
-      period: "Aug 2020 – Jun 2023",
+      period: "Aug 2019 – Jun 2023",
       bullets: [
         "Developed and maintained dynamic UI components using React, Redux, and JavaScript for AI-powered visual defect identification tools.",
         "Collaborated with the deep learning team to integrate frontend interfaces with defect detection models, improving system usability.",
         "Optimized performance and responsiveness using lazy loading and state management."
-      ]
+      ],
+      skills: ["React", "Redux", "JavaScript", "UI Components", "Performance Optimization", "AI Integration"]
     }
   ],
   projects: [

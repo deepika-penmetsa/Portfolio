@@ -136,7 +136,7 @@
   display: inline-block;
 }
 
-.skills-title::after {
+/* .skills-title::after {
   content: '';
   position: absolute;
   bottom: -10px;
@@ -145,7 +145,7 @@
   height: 3px;
   background-color: var(--accent-color, #00e3aa);
   border-radius: 2px;
-}
+} */
 
 .skills-container {
   margin-top: 40px;
