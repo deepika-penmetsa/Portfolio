@@ -129,7 +129,6 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 1.5rem;
   }
 
   /* Responsive sizes */

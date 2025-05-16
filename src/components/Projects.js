@@ -23,6 +23,8 @@ const Projects = ({ resumeData }) => {
     swipeToSlide: true,
     touchThreshold: 10,
     dotsClass: "slick-dots custom-dots",
+    fade: true,
+    cssEase: "linear",
     responsive: [
       {
         breakpoint: 1024,
@@ -37,7 +39,7 @@ const Projects = ({ resumeData }) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          autoplaySpeed: 4000,
+          autoplay: false,
           dots: true,
           swipe: true,
           touchMove: true
@@ -284,7 +286,23 @@ const ProjectsSliderWrapper = styled.div`
   
   .slick-slide > div {
     height: 100%;
-    padding: 10px;
+  }
+  
+  .slick-track {
+    display: flex !important;
+  }
+  
+  .slick-slide {
+    height: inherit !important;
+    display: flex !important;
+  }
+  
+  .slick-slide > div {
+    width: 100%;
+  }
+  
+  .slick-active {
+    z-index: 10;
   }
   
   .slick-dots.custom-dots {
@@ -438,6 +456,16 @@ const ProjectCard = styled.div`
   display: flex;
   flex-direction: column;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  min-height: 600px;
+  
+  @media (max-width: 768px) {
+    min-height: 550px;
+  }
+  
+  @media (max-width: 480px) {
+    min-height: 500px;
+  }
   
   &:hover {
     transform: translateY(-5px);
@@ -692,7 +720,8 @@ const LinkButton = styled.a`
     background-color: ${props => props.$primary 
       ? (props.theme.name === 'dark' ? 'rgba(0, 227, 170, 0.8)' : '#0366D6') 
       : (props.theme.name === 'dark' ? 'rgba(30, 30, 30, 0.7)' : 'rgba(246, 248, 250, 0.9)')};
-  }
+    color: ${props => props.$primary ? '#FFFFFF' : props.theme.foreground};
+      }
   
   @media (max-width: 480px) {
     padding: 6px 12px;
