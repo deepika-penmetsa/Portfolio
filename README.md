@@ -1,5 +1,5 @@
 
-# Deepika Pennetisa - Portfolio
+# Deepika Penmetsa - Portfolio
 
 ## Portfolio Overview
 A responsive professional portfolio showcasing Deepika Penmetsa's full-stack development work. Features project case studies, technical skills visualization, and professional background.
