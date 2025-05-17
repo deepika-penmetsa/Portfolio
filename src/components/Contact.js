@@ -36,7 +36,7 @@ const Contact = ({ resumeData }) => {
                   <MdEmail />
                 </ContactIcon>
                 <ContactInfoValue>
-                  <a href="mailto:deepikapenmetsa05@gmail.com">
+                  <a href={`mailto:${resumeData.personal.email}`}>
                     {resumeData.personal.email}
                   </a>
                 </ContactInfoValue>
@@ -272,7 +272,7 @@ const ContactInfoValue = styled.div`
     
     &:hover {
       color: ${props => props.theme.primary};
-      text-decoration: underline;
+      text-decoration: none;
     }
   }
   

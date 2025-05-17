@@ -492,6 +492,8 @@ const ProjectHeader = styled.div`
 `;
 
 const ProjectLogoWrapper = styled.div`
+  background-color: white;
+  border-radius: 12px;
   flex-shrink: 0;
 `;
 
@@ -500,7 +502,7 @@ const ProjectLogo = styled.img`
   height: 120px;
   border-radius: 12px;
   border: 1px solid ${props => props.theme.border};
-  
+  background-color: "#000000";
   @media (max-width: 768px) {
     width: 100px;
     height: 100px;
@@ -707,18 +709,19 @@ const LinkButton = styled.a`
   background-color: ${props => props.$primary 
     ? (props.theme.name === 'dark' ? props.theme.accent : '#0366D6') 
     : (props.theme.name === 'dark' ? 'rgba(0, 0, 0, 0.5)' : 'rgba(246, 248, 250, 0.8)')};
-  color: ${props => props.$primary ? '#FFFFFF' : props.theme.foreground};
+  color: ${props => props.$primary ? '#000000' : props.theme.foreground};
   border: 1px solid ${props => props.$primary 
     ? 'transparent' 
     : props.theme.border};
   
   &:hover {
     transform: translateY(-3px);
+    text-decoration: none;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     background-color: ${props => props.$primary 
       ? (props.theme.name === 'dark' ? 'rgba(0, 227, 170, 0.8)' : '#0366D6') 
       : (props.theme.name === 'dark' ? 'rgba(30, 30, 30, 0.7)' : 'rgba(246, 248, 250, 0.9)')};
-    color: ${props => props.$primary ? '#FFFFFF' : props.theme.foreground};
+    color: ${props => props.$primary ? '#000000' : props.theme.foreground};
       }
   
   @media (max-width: 480px) {

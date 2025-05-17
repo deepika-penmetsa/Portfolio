@@ -8,7 +8,7 @@ import portfolioImage from '../data/profile.png';
 const resumeData = {
   personal: {
     name: "Deepika Penmetsa",
-    location: "Mount Pleasant, Michigan 48858",
+    location: "Wendell, North Carolina 27591",
     phone: "989-621-7701",
     email: "deepikapenmetsa05@gmail.com",
     linkedin: "linkedin.com/in/deepika",
@@ -288,7 +288,7 @@ I'm a Full Stack Developer with a passion for building user-friendly web applica
 
     "contact.json": {
       "name": "Deepika Penmetsa",
-      "location": "Mount Pleasant, Michigan 48858",
+      "location": "Wendell, North Carolina 27591",
       "email": "deepikapenmetsa05@gmail.com",
       "phone": "989-621-7701",
       "profiles": [
@@ -302,7 +302,7 @@ I'm a Full Stack Developer with a passion for building user-friendly web applica
         },
         {
           "network": "Email",
-          "url": "deepikapenmetsa05@gmail.com"
+          "url": "mailto:deepikapenmetsa05@gmail.com"
         },
         {
           "network": "Leetcode",
