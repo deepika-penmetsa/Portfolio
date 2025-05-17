@@ -1,53 +1,32 @@
-# Portfolio Terminal
 
-A portfolio website that combines a VS Code interface with a Linux terminal, showcasing my skills and projects.
+# Deepika Pennetisa - Portfolio
 
-## Features
+## Portfolio Overview
+A responsive professional portfolio showcasing Deepika Penmetsa's full-stack development work. Features project case studies, technical skills visualization, and professional background.
 
-- **Dual Themes**: Toggle between VS Code Dark theme and Linux Terminal theme
-- **VS Code-like Interface**: File explorer sidebar and editor
-- **Interactive Terminal**: Functional terminal with commands like `ls`, `cat`, and easter eggs
-- **Responsive Design**: Works on all device sizes
+## Technologies Used
+- **Frontend**: React.js, JavaScript (ES6+), HTML5, CSS3
+- **Styling**: CSS Modules/Sass (or Tailwind - specify if known)
+- **Deployment**: Netlify
 
-## Tech Stack
+## Local Setup
 
-- React.js
-- styled-components for styling
-- xterm.js for the terminal emulator
+### Prerequisites
+- Node.js (v14+)
+- npm (v6+)
 
-## Running the Project
 
-1. Clone the repository
-2. Install dependencies:
-   ```
-   npm install
-   ```
-3. Start the development server:
-   ```
-   npm start
-   ```
-4. Open [http://localhost:3000](http://localhost:3000) to view it in your browser
+# Clone the repository
+git clone https://github.com/deepika-penmetsa/Portfolio
 
-## Available Terminal Commands
+# Navigate to project directory
+cd portfolio
 
-- `ls` - List files
-- `cat <filename>` - Display file contents
-- `help` - Show help message
-- `clear` - Clear terminal
-- `pwd` - Print working directory
-- `whoami` - Display current user
-- `sudo hire-me` - Easter egg
-- `vim` - Easter egg
+# Install dependencies
+npm install
 
-## Project Structure
+# Start development server
+npm start
 
-- `src/components/` - React components
-- `src/styles/` - Styled components and theme definitions
-- `src/data/` - Resume and portfolio data
-
-## Credits
-
-- [xterm.js](https://xtermjs.org/) - Terminal emulator
-- [styled-components](https://styled-components.com/) - CSS-in-JS styling
-- [React Markdown](https://github.com/remarkjs/react-markdown) - Markdown rendering
-# Portfolio
+# Build for production
+npm run build
