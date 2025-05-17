@@ -36,7 +36,7 @@ const Contact = ({ resumeData }) => {
                   <MdEmail />
                 </ContactIcon>
                 <ContactInfoValue>
-                  <a href={`mailto:${resumeData.personal.email}`}>
+                  <a href="mailto:deepikapenmetsa05@gmail.com">
                     {resumeData.personal.email}
                   </a>
                 </ContactInfoValue>

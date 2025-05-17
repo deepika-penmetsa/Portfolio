@@ -65,7 +65,7 @@ const resumeData = {
     
     {
       name: "Job Matrix",
-      date: "April 2025",
+      date: "May 2025",
       links: {
         live: "https://jobmatrixapp.netlify.app",
         github: "https://github.com/deepika-penmetsa/JobMatrixFrontend"
