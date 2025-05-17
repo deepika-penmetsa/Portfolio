@@ -19,8 +19,6 @@ const GlobalStyle = createGlobalStyle`
     color: ${props => props.theme.foreground};
     overflow-x: hidden;
     transition: background-color 0.3s, color 0.3s;
-    
-    /* Theme CSS variables */
     --bg-color: ${props => props.theme.background};
     --text-color: ${props => props.theme.foreground};
     --accent-color: ${props => props.theme.accent};
@@ -131,7 +129,6 @@ const GlobalStyle = createGlobalStyle`
     margin: 0 auto;
   }
 
-  /* Responsive sizes */
   @media (max-width: 768px) {
     html {
       font-size: 14px;

@@ -1,4 +1,3 @@
-// VS Code Dark theme with Linux terminal-like colors
 export const vscodeTheme = {
   name: 'dark',
   background: '#121212',
@@ -61,7 +60,6 @@ export const vscodeTheme = {
   }
 };
 
-// VS Code Light theme with blue accent color
 export const vscodeLightTheme = {
   name: 'light',
   background: '#FFFFFF',

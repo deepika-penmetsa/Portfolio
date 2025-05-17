@@ -25,7 +25,6 @@ const Navbar = ({ activeSection, setActiveSection, currentTheme, toggleTheme }) 
   }, []);
 
   useEffect(() => {
-    // Handle clicks outside the menu to close it
     const handleClickOutside = (event) => {
       if (menuOpen && 
           menuRef.current && 
@@ -58,8 +57,6 @@ const Navbar = ({ activeSection, setActiveSection, currentTheme, toggleTheme }) 
 
   const handleMouseLeave = () => {
     if (window.innerWidth <= 768) {
-      // Don't auto-close on mouse leave for better mobile UX
-      // setMenuOpen(false);
     }
   };
 

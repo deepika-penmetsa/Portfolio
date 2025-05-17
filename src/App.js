@@ -84,7 +84,7 @@ const AppContainer = styled.div`
 
 const MainContent = styled.main`
   flex: 1;
-  padding-top: 60px; /* Space for fixed navbar */
+  padding-top: 60px; 
   scroll-behavior: smooth;
   overflow-y: auto;
   

@@ -96,7 +96,6 @@ const Projects = ({ resumeData }) => {
                             </FeatureItem>
                           ))}
                           
-                          {/* If no highlights are provided, use detailedDescription */}
                           {(!project.highlights || !Array.isArray(project.highlights) || project.highlights.length === 0) && 
                             Array.isArray(project.detailedDescription) && 
                             project.detailedDescription.slice(0, 4).map((desc, idx) => (
@@ -500,7 +499,6 @@ const ProjectLogo = styled.img`
   width: 120px;
   height: 120px;
   border-radius: 12px;
-  object-fit: cover;
   border: 1px solid ${props => props.theme.border};
   
   @media (max-width: 768px) {

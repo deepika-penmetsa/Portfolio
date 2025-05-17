@@ -10,7 +10,6 @@ const Home = ({ resumeData }) => {
   const themeContext = useContext(ThemeContext);
   const isDarkTheme = themeContext.name === 'dark';
   
-  // Select skills to display
   const displaySkills = {
     React: <SiReact />,
     Python: <SiPython />,

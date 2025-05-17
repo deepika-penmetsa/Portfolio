@@ -1,10 +1,9 @@
-/* Experience Section Styles */
 .fade-section#experience {
   padding: 100px 0;
   background-color: var(--bg-color, #121212);
   min-height: 100vh;
   color: var(--text-color, #e0e0e0);
-  --accent-color-rgb: 0, 227, 170; /* Add explicit RGB values for dark mode */
+  --accent-color-rgb: 0, 227, 170; 
 }
 
 .experience-content {
@@ -47,7 +46,6 @@
   font-weight: 500;
 }
 
-/* Experience Container */
 .experience-container {
   max-width: 1400px;
   margin: 0 auto;
@@ -57,18 +55,17 @@
   position: relative;
 }
 
-/* New Experience Navigation Styles */
 .experience-nav-wrapper {
   overflow-x: auto;
   margin-bottom: 30px;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none; 
   position: relative;
-  padding-bottom: 2px; /* Space for scrollbar */
+  padding-bottom: 2px; 
 }
 
 .experience-nav-wrapper::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none; 
 }
 
 .experience-nav {
@@ -77,7 +74,7 @@
   justify-content: center;
   gap: 15px;
   min-width: max-content;
-  padding-bottom: 8px; /* Space for indicator */
+  padding-bottom: 8px; 
 }
 
 .company-tab {
@@ -135,7 +132,6 @@
   position: relative;
 }
 
-/* Content area */
 .content-column {
   flex: 1;
   position: relative;
@@ -193,7 +189,6 @@
   border-radius: 5px;
 }
 
-/* Bullet list styles */
 .bullet-list {
   list-style: none;
   padding: 0;
@@ -223,7 +218,6 @@
   color: var(--text-color, #e0e0e0);
 }
 
-/* Vertical Timeline for Mobile */
 .vertical-timeline {
   width: 100%;
 }
@@ -345,10 +339,9 @@
   padding-top: 15px;
 }
 
-/* Light mode overrides */
 [data-theme='light'] .fade-section#experience {
   background-color: var(--bg-color, #FFFFFF);
-  --accent-color-rgb: 3, 102, 214; /* Add explicit RGB values for light mode */
+  --accent-color-rgb: 3, 102, 214; 
 }
 
 [data-theme='light'] .section-title {
@@ -455,14 +448,12 @@
   font-size: 1.1rem;
 }
 
-/* Fixing any green shade that might appear in light mode */
 [data-theme='light'] .timeline-content:after {
   background: radial-gradient(circle at center bottom, 
     rgba(3, 102, 214, 0.05) 0%, 
     transparent 70%);
 }
 
-/* Responsive Styles */
 @media (max-width: 1024px) {
   .experience-nav {
     justify-content: flex-start;
@@ -671,7 +662,6 @@
   box-shadow: 0 2px 5px rgba(var(--accent-color-rgb), 0.15);
 }
 
-/* Light mode override for skills */
 [data-theme='light'] .skill-tag {
   background-color: rgba(3, 102, 214, 0.08);
   color: #0366D6;

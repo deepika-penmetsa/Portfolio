@@ -1,5 +1,5 @@
-import jobmatrixImage from '../data/jobmatrix.png';
-import elevateImage from '../data/elevate.png';
+import jobmatrixImage from '../data/JobMatrix.svg';
+import elevateImage from '../data/elevate.svg';
 import iplImage from '../data/ipl.png';
 import portfolioImage from '../data/profile.png';
 
@@ -62,28 +62,7 @@ const resumeData = {
     }
   ],
   projects: [
-    {
-      name: "Portfolio Website",
-      date: "May 2025",
-      links: {
-        github: "https://github.com/deepika-penmetsa/Portfolio"
-      },
-      image: portfolioImage,
-      description: "A modern, interactive personal portfolio website featuring a terminal-inspired interface with a responsive design, dark/light mode toggle, and project showcase to highlight my skills and development experience.",
-      detailedDescription: [
-        "Developed a fully responsive portfolio with React.js and styled-components using a unique terminal-inspired interface",
-        "Implemented a custom projects carousel with interactive navigation and responsive layout for optimal viewing across devices",
-        "Created a dark/light theme system with seamless transitions and consistent visual hierarchy",
-        "Built an interactive terminal emulation with custom commands for an engaging user experience"
-      ],
-      technologies: ["React", "JavaScript", "Styled Components", "Framer Motion", "Responsive Design", "Terminal UI"],
-      highlights: [
-        "Terminal-inspired interface with command execution",
-        "Fully responsive design with mobile-first approach",
-        "Custom carousel with interactive navigation",
-        "Seamless dark/light mode theming"
-      ]
-    },
+    
     {
       name: "Job Matrix",
       date: "April 2025",
@@ -142,12 +121,34 @@ const resumeData = {
         "Utilized React JS for a dynamic and user-friendly interface, showcasing team details and statistics.",
         "Ensured 100 percent responsive design with interactive components."
       ],
-      technologies: ["React", "JavaScript", "API Integration", "CSS", "Redux"],
+      technologies: ["React", "JavaScript", "CSS", "Redux"],
       highlights: [
         "Data visualization for team and player statistics",
         "Real-time match updates and scorecards",
         "Interactive team comparison features",
         "Optimized performance for mobile devices"
+      ]
+    },
+    {
+      name: "Portfolio Website",
+      date: "May 2025",
+      links: {
+        github: "https://github.com/deepika-penmetsa/Portfolio"
+      },
+      image: portfolioImage,
+      description: "A modern, interactive personal portfolio website featuring a terminal-inspired interface with a responsive design, dark/light mode toggle, and project showcase to highlight my skills and development experience.",
+      detailedDescription: [
+        "Developed a fully responsive portfolio with React.js and styled-components using a unique terminal-inspired interface",
+        "Implemented a custom projects carousel with interactive navigation and responsive layout for optimal viewing across devices",
+        "Created a dark/light theme system with seamless transitions and consistent visual hierarchy",
+        "Built an interactive terminal emulation with custom commands for an engaging user experience"
+      ],
+      technologies: ["React", "JavaScript", "Styled Components", "Framer Motion", "Responsive Design", "Terminal UI"],
+      highlights: [
+        "Terminal-inspired interface with command execution",
+        "Fully responsive design with mobile-first approach",
+        "Custom carousel with interactive navigation",
+        "Seamless dark/light mode theming"
       ]
     }
   ],

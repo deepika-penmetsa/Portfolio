@@ -15,14 +15,13 @@ const staggerBullets = {
 };
 
 const Experience = ({ resumeData }) => {
-  // Get experience data from resumeData
   const experienceItems = resumeData.experience.map((exp, index) => ({
     id: `exp-${index}`,
     name: exp.company,
     position: `${exp.title} @ ${exp.company}`,
     date: exp.period,
     bullets: exp.bullets,
-    skills: exp.skills || [] // Add skills from resumeData, default to empty array if not present
+    skills: exp.skills || [] 
   }));
 
   const [activeItem, setActiveItem] = useState(0);
@@ -33,7 +32,6 @@ const Experience = ({ resumeData }) => {
   const [navPosition, setNavPosition] = useState(0);
   const [expandedItems, setExpandedItems] = useState({});
   
-  // Handle window resize
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -42,7 +40,6 @@ const Experience = ({ resumeData }) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Update nav indicator position when active item changes
   useEffect(() => {
     if (navRef.current && !isMobile) {
       const tabs = navRef.current.querySelectorAll('.company-tab');
@@ -56,11 +53,8 @@ const Experience = ({ resumeData }) => {
 
   const handleItemClick = (index) => {
     if (isMobile) {
-      // When one accordion is opened, close all others
       setExpandedItems(prev => {
         const isCurrentlyExpanded = prev[index];
-        // If the clicked item is already expanded, just toggle it
-        // Otherwise, close all items and open only the clicked one
         return isCurrentlyExpanded 
           ? { ...prev, [index]: false } 
           : { [index]: true };
@@ -87,7 +81,6 @@ const Experience = ({ resumeData }) => {
       </div>
 
       <div className="experience-container">
-        {/* Horizontal Navigation - Only shown on desktop */}
         {!isMobile && (
           <div className="experience-nav-wrapper">
             <div className="experience-nav" ref={navRef}>
@@ -108,7 +101,6 @@ const Experience = ({ resumeData }) => {
         )}
         
         <div className="work-container">
-          {/* Vertical Timeline for Mobile */}
           {isMobile && (
             <div className="vertical-timeline">
               {experienceItems.map((item, index) => (
@@ -153,7 +145,6 @@ const Experience = ({ resumeData }) => {
                             ))}
                           </motion.ul>
                           
-                          {/* Display skills if available */}
                           {item.skills && item.skills.length > 0 && (
                             <motion.div 
                               className="skills-container"
@@ -176,7 +167,6 @@ const Experience = ({ resumeData }) => {
             </div>
           )}
           
-          {/* Desktop Content Panel */}
           {!isMobile && (
             <div className="content-column">
               <AnimatePresence mode="wait">
@@ -209,7 +199,6 @@ const Experience = ({ resumeData }) => {
                     ))}
                   </motion.ul>
                   
-                  {/* Display skills if available */}
                   {activeItemData?.skills && activeItemData.skills.length > 0 && (
                     <motion.div 
                       className="skills-container"
