@@ -6,7 +6,7 @@ A responsive professional portfolio showcasing Deepika Penmetsa's full-stack dev
 
 ## Technologies Used
 - **Frontend**: React.js, JavaScript (ES6+), HTML5, CSS3
-- **Styling**: CSS Modules/Sass (or Tailwind - specify if known)
+- **Styling**: CSS Modules
 - **Deployment**: Netlify
 
 ## Local Setup
