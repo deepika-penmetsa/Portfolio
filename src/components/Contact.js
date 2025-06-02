@@ -59,22 +59,6 @@ const Contact = ({ resumeData }) => {
                 </ContactIcon>
                 <ContactInfoValue>{resumeData.personal.location}</ContactInfoValue>
               </ContactInfoItem>
-
-              <ContactInfoItem>
-                <ContactIcon>
-                  <FaFileAlt />
-                </ContactIcon>
-                <ContactInfoValue>
-                  <ResumeActions>
-                    <ResumeLink href={resumePath} target="_blank" rel="noopener noreferrer">
-                      <MdOpenInNew /> View Resume
-                    </ResumeLink>
-                    <ResumeLink href={resumePath} download="Deepika_Penmetsa_Resume.pdf">
-                      <MdDownload />
-                    </ResumeLink>
-                  </ResumeActions>
-                </ContactInfoValue>
-              </ContactInfoItem>
             </ContactInfoItems>
             
             <SocialLinks>
