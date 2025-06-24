@@ -23,6 +23,19 @@ const resumeData = {
 
   experience: [
     {
+      title: "Engineer",
+      company: "Teleflex",
+      location: "Morrisville, NC",
+      period: "Jul 2024 - Jun 2025",
+      bullets: [
+        "Developed responsive React frontend applications with Redux state management, implementing dynamic user interfaces with component-based architecture and ensuring seamless integration with Django backend APIs",
+        "Engineered and developed 30+ RESTful APIs using Django REST framework integrated with AWS services (S3, RDS), contributing to a microservices architecture that reduced data processing latency by 40%",
+        "Collaborated in 20+ Agile sprints using Jira and Scrum methodology, achieving 85% code coverage and a 5% reduction in defects through effective unit testing with Django’s testing framework and pytest",
+        "Enhanced database performance across MySQL and PostgreSQL systems by utilizing Django ORM, implementing complex SQL queries, stored procedures, and efficient indexing strategies for optimized data retrieval"
+      ],
+      skills: ["React", "Redux", "Django", "RESTful APIs", "AWS Services", "Agile Methodologies", "Unit Testing", "Microservices Architecture"]
+    },
+    {
       title: "Graduate Research Assistant",
       company: "Central Michigan University",
       location: "Mount Pleasant, MI",

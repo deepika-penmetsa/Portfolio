@@ -44,17 +44,6 @@ const Contact = ({ resumeData }) => {
               
               <ContactInfoItem>
                 <ContactIcon>
-                  <MdPhone />
-                </ContactIcon>
-                <ContactInfoValue>
-                  <a href={`tel:${resumeData.personal.phone}`}>
-                    {resumeData.personal.phone}
-                  </a>
-                </ContactInfoValue>
-              </ContactInfoItem>
-              
-              <ContactInfoItem>
-                <ContactIcon>
                   <MdLocationOn />
                 </ContactIcon>
                 <ContactInfoValue>{resumeData.personal.location}</ContactInfoValue>

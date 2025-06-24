@@ -14,7 +14,7 @@ import {
     SiNodedotjs, SiExpress, SiDjango, 
     SiMongodb, SiRedux, SiPostman, 
     SiSwagger, SiJira, SiJetbrains, SiLeetcode, SiDatastax,
-    SiThealgorithms
+    SiThealgorithms, SiMui
 } from 'react-icons/si';
 import { LuFigma } from 'react-icons/lu';
 import { BiLogoVisualStudio } from 'react-icons/bi';
@@ -132,8 +132,8 @@ const About = ({ resumeData }) => {
                                         { icon: FaAws, name: 'AWS' },
                                         { icon: FaPix, name: 'REST APIs' },
                                         { icon: SiAngular, name: 'Angular' },
-                                        // { icon: SiNodedotjs, name: 'NodeJs' },
-                                        // { icon: SiExpress, name: 'ExpressJs' },
+                                        { icon: SiNodedotjs, name: 'NodeJs' },
+                                        { icon: SiMui, name: 'Material-UI' },
                                         { icon: SiRedux, name: 'Redux' },
                                         { icon: SiJira, name: 'Jira' },
                                         // { icon: SiMongodb, name: 'MongoDB' },
